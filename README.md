@@ -42,6 +42,13 @@ Portal.register({
 ## Sudoku'ya bulmaca eklemek
 `games/sudoku/game.js` içinde `DIFFS` listesindeki bir zorluğun `count` değerini artırın. Bulmacalar sabit tohumdan tarayıcıda üretilir ve her birinin tek çözümü vardır; `clues` o zorluktaki hedef ipucu rakam sayısıdır.
 
+## Düzenle'ye bölüm eklemek
+`games/duzenle/art.js` içinde:
+- Yeni eşya: `ITEMS` içine `{ w, h, draw(v) }` ekleyin. `draw`, eşyayı kendi merkezine (0,0) göre çizen bir SVG parçası döndürür; `v` renk/çeşit bilgisidir. Yuvarlak eşyalara `round: true` ekleyin (oval bölmeye girer).
+- Yeni bölüm: `LEVELS` dizisine `{ id, name, short, W, H, target, table, slotColor, container, slots }` ekleyin. `slots` içindeki her kayıt `{ k: eşya türü, v: çeşit, x, y, r }` hem bölmeyi hem eşyayı oluşturur.
+- Birden çok çekmece için `container/slots` yerine `drawers: [{ name, container, slots, slotColor? }, ...]` yazın.
+- Bölmeler eşyanın boyutundadır; benzer boyuttaki eşyalar birbirinin bölmesine girebilir, oyuncu yanlış yerleştirdiğini çıkarıp düzeltebilir.
+
 ## Yerelde çalıştırma
 ```
 python3 -m http.server 8000
