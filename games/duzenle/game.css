@@ -64,7 +64,7 @@
 .dz-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
 .dz-item { cursor: grab; }
 .dz-item.lift { cursor: grabbing; }
-.dz-item.done { cursor: default; pointer-events: none; }
+.dz-item.done { cursor: grab; }
 .dz-hit { fill: transparent; }
 .dz-slot.near { animation: dzPulse .7s ease-in-out infinite; }
 .dz-slot.hinted, .dz-item.hinted { animation: dzPulse .55s ease-in-out infinite; }

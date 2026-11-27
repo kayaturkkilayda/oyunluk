@@ -11,7 +11,7 @@
   const NS = 'http://www.w3.org/2000/svg';
   const HINTS = 3;
   const PAD = 10;        // bölme, eşyadan bu kadar büyük
-  const FIT_MIN = 0.75;  // eşya, bölmenin asıl sahibinin en az %75'i boyunda olmalı
+  const FIT_MIN = 0.85;  // eşya, bölmenin asıl sahibinin en az %85'i boyunda olmalı
   const PENTA = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98];
 
   // ---------------------------------------------------------------- yardımcılar
@@ -453,6 +453,23 @@
       if (navigator.vibrate) try { navigator.vibrate(12); } catch (e) { /* yok */ }
       updateHUD();
       checkDone(s.drawer);
+      if (!play.done) checkStuck();
+    }
+    // Kalan bir eşya hiçbir boş bölmeye sığmıyorsa: bazı eşyalar yanlış yerde. Onları göster.
+    function checkStuck() {
+      const loose = play.items.filter(it => !it.slot);
+      const empty = play.slots.filter(s => !s.item);
+      const stuck = loose.some(it => !empty.some(s => fitAngle(it, s) !== null));
+      if (!stuck) return;
+      const wrong = play.items.filter(it => it.slot && it.slot.k !== it.k);
+      if (!wrong.length) return;
+      later(() => {
+        if (!play || play.done) return;
+        toast('Bazı eşyalar yanlış bölmede! Sallananları tutup çıkar, doğru yerlerine koy.', 4200);
+        const d = wrong.find(it => it.slot.drawer.n === play.cur) || wrong[0];
+        if (d.slot.drawer.n !== play.cur) switchDrawer(d.slot.drawer.n, true);
+        wrong.forEach(it => { it.g.classList.add('hinted'); wiggle(it); later(() => it.g.classList.remove('hinted'), 3500); });
+      }, 450);
     }
     function unplace(it) {
       const s = it.slot;
