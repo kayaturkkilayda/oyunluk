@@ -32,6 +32,7 @@
 .ad-diff { padding: 2px 8px; border-radius: 99px; background: #e7f6f2; color: var(--ad-sea); }
 .ad-diff.orta { background: #fff3d1; color: #9a6a00; }
 .ad-diff.zor { background: #ffe3dc; color: #b23a22; }
+.ad-diff.uzman { background: #efe0ff; color: #6a2fb3; }
 .ad-stars { letter-spacing: 2px; color: #d9d2c3; font-size: 1rem; }
 .ad-stars b { color: var(--ad-sun); font-weight: 400; }
 .ad-mini-bar { height: 6px; background: #efe9dc; border-radius: 99px; overflow: hidden; }

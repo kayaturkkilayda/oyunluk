@@ -68,8 +68,38 @@
       targets: [['🏮', 5], ['🎇', 4], ['🎁', 4], ['🎭', 4], ['🥁', 4], ['🎺', 4], ['🍭', 5], ['🎪', 3], ['🌙', 3], ['🎐', 4]],
       pool: ['🎈', '🎉', '🎊', '🍬', '🍫', '🍿', '🧁', '🍩', '🍡', '🍢', '🎀', '🎶', '🎵', '🔥', '⭐', '🌟', '🕯️', '🎸', '🎻', '🎤', '🧃', '🍹', '🌺', '🥥', '🍉', '🎏'],
     },
+    {
+      id: 'gunbatimi', name: 'Gün Batımı Kumsalı', diff: 'Zor', W: 2400, H: 1600, paint: 'beach', seed: 131, tint: 'rgba(255,150,90,.42)',
+      size: [25, 36], decoys: 440,
+      targets: [['🦩', 5], ['🍹', 4], ['🥥', 4], ['🐢', 4], ['🪁', 4], ['🧴', 4], ['🍦', 4], ['⛱️', 4], ['🎈', 4]],
+      pool: ['🐚', '🦀', '🕶️', '🍉', '🏐', '🐠', '🌺', '👙', '🧃', '📻', '⛵', '🦜', '🍍', '🥭', '🌸', '🩱', '🍋', '🥤', '🧢', '🎏', '🐬', '⭐'],
+    },
+    {
+      id: 'volkan', name: 'Volkan Eteği', diff: 'Zor', W: 2400, H: 1600, paint: 'volcano', seed: 137,
+      size: [25, 36], decoys: 450,
+      targets: [['🔥', 5], ['💎', 4], ['🦕', 4], ['🦖', 4], ['🥚', 5], ['⛏️', 4], ['🧪', 4], ['🌡️', 4], ['🦂', 4]],
+      pool: ['🍄', '🐍', '🦎', '🌵', '🦴', '🔮', '📜', '🗝️', '🧭', '⚙️', '🔩', '🧲', '🕯️', '🐀', '🦇', '☄️', '⭐', '🪓', '🎒', '🔦', '💰'],
+    },
+    {
+      id: 'firtina', name: 'Fırtınalı İskele', diff: 'Uzman', W: 2600, H: 1733, paint: 'pier', seed: 149, tint: 'rgba(80,100,140,.5)',
+      size: [24, 35], decoys: 500,
+      targets: [['🌂', 4], ['⚡', 4], ['🐟', 5], ['🦞', 4], ['⚓', 4], ['🔦', 4], ['🥾', 4], ['🐙', 4], ['🧭', 4]],
+      pool: ['🧤', '🧰', '🔧', '🧊', '🐡', '🦈', '🧵', '🎒', '🪑', '🕯️', '⛵', '🥫', '🧂', '🍞', '🦐', '🦑', '🔔', '🎣', '📦', '🛶', '🐬', '🐳'],
+    },
+    {
+      id: 'agacev', name: 'Ağaç Ev Köyü', diff: 'Uzman', W: 2600, H: 1733, paint: 'treehouse', seed: 157,
+      size: [24, 35], decoys: 500,
+      targets: [['🧸', 4], ['🏹', 4], ['🪀', 4], ['🐿️', 5], ['🦉', 4], ['🍯', 4], ['🔭', 4], ['🧶', 4], ['🐝', 5]],
+      pool: ['🍂', '🍁', '🌿', '🍄', '🐛', '🐌', '🐞', '🦋', '🌰', '🍎', '🍐', '🧺', '🪓', '🔦', '🧤', '🥾', '🎣', '🪑', '🕯️', '📚', '🎨', '🪁', '🦔', '🐦'],
+    },
+    {
+      id: 'ayresif', name: 'Ay Işığında Resif', diff: 'Uzman', W: 2800, H: 1867, paint: 'reef', seed: 163, tint: 'rgba(70,50,150,.5)',
+      size: [23, 34], decoys: 580,
+      targets: [['🦑', 4], ['🐙', 4], ['🐚', 5], ['🦐', 5], ['🦞', 4], ['🐡', 4], ['🔱', 4], ['🏺', 4], ['💎', 4], ['🗝️', 4]],
+      pool: ['🐠', '🐟', '🐢', '🦈', '🐬', '🐋', '🐳', '⚓', '🦪', '🌿', '💧', '🧭', '⭐', '🌟', '🌙', '🔮', '🎣', '🌀', '🍀', '🐊', '📜', '💰'],
+    },
   ];
-  const PAR_PER_ITEM = { Kolay: 12, Orta: 14, Zor: 16 };
+  const PAR_PER_ITEM = { Kolay: 12, Orta: 14, Zor: 16, Uzman: 18 };
   const HINT_MAX = 3, HINT_RECHARGE = 45000, COMBO_WINDOW = 5000;
   const EMOJI_FONT = '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Twemoji Mozilla",sans-serif';
 
@@ -442,6 +472,56 @@
       }
       for (let i = 0; i < 400; i++) { c.fillStyle = pick(R, ['#ff5d8f', '#ffd166', '#4cc9f0', '#90ee90', '#ffffff']); c.fillRect(R() * W, between(R, sea, H), 5, 3); }
     },
+    volcano(c, W, H, R) {
+      c.fillStyle = '#5a4f4f'; c.fillRect(0, 0, W, H);
+      for (let i = 0; i < 46; i++) blob(c, R() * W, R() * H, between(R, 60, 150), R, pick(R, ['#524848', '#665a59', '#4a4141']));
+      speckle(c, W, H, R, 2800, ['#3f3737', '#7a6d6b', '#5f5453'], 2.5);
+      c.fillStyle = '#5f9e46'; c.beginPath(); c.moveTo(0, H); for (let x = 0; x <= W; x += 30) c.lineTo(x, H * 0.82 + Math.sin(x / 110) * 40); c.lineTo(W, H); c.fill();
+      for (let i = 0; i < 22; i++) tree(c, R() * W, between(R, H * 0.86, H), between(R, 40, 70), R, ['#2e7d32', '#388e3c', '#43a047']);
+      const vx = W * 0.55, vy = H * 0.3;
+      [[420, '#6e5a4e'], [330, '#5b4a40'], [240, '#4b3c34'], [150, '#3b2e28']].forEach(([r, col]) => blob(c, vx, vy, r, R, col));
+      const gl = c.createRadialGradient(vx, vy, 0, vx, vy, 200); gl.addColorStop(0, 'rgba(255,190,80,.9)'); gl.addColorStop(.5, 'rgba(255,90,40,.6)'); gl.addColorStop(1, 'rgba(255,60,20,0)');
+      c.fillStyle = gl; c.beginPath(); c.arc(vx, vy, 200, 0, 6.283); c.fill();
+      c.fillStyle = '#ff5a1f'; c.beginPath(); c.arc(vx, vy, 80, 0, 6.283); c.fill(); c.fillStyle = '#ffb347'; c.beginPath(); c.arc(vx, vy, 44, 0, 6.283); c.fill();
+      c.lineCap = 'round';
+      for (let n = 0; n < 4; n++) {
+        const a = -0.6 + n * 0.9 + between(R, -.2, .2), pts = [];
+        for (let t = 0; t <= 1.001; t += 0.05) pts.push([vx + Math.cos(a) * t * W * 0.55 + Math.sin(t * 8 + n) * 40, vy + Math.sin(a + 0.9) * t * H * 0.7 + t * 100]);
+        [[70, 'rgba(255,90,30,.25)'], [34, '#e84a1a'], [14, '#ffb347']].forEach(([w, col]) => { c.strokeStyle = col; c.lineWidth = w; c.beginPath(); pts.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.stroke(); });
+      }
+      for (let i = 0; i < 26; i++) blob(c, R() * W, R() * H, between(R, 24, 55), R, pick(R, ['#2e2828', '#3a3232']), '#221d1d');
+      c.fillStyle = 'rgba(255,255,255,.18)';
+      for (let i = 0; i < 30; i++) { c.beginPath(); c.arc(vx + between(R, -260, 260), vy + between(R, -260, 120), between(R, 30, 70), 0, 6.283); c.fill(); }
+    },
+    treehouse(c, W, H, R) {
+      c.fillStyle = '#7a9a4f'; c.fillRect(0, 0, W, H);
+      for (let i = 0; i < 46; i++) blob(c, R() * W, R() * H, between(R, 60, 150), R, pick(R, ['#6f8f45', '#86a85a', '#8a7a4f']));
+      speckle(c, W, H, R, 2600, ['#5f7d3a', '#9cbc6c', '#7d6a43'], 2.5);
+      c.strokeStyle = '#b89463'; c.lineWidth = 40; c.lineCap = 'round'; c.beginPath(); c.moveTo(0, H * 0.7); c.bezierCurveTo(W * 0.3, H * 0.5, W * 0.6, H * 0.95, W, H * 0.6); c.stroke();
+      for (let i = 0; i < 40; i++) tree(c, R() * W, R() * H, between(R, 70, 120), R, ['#1b5e20', '#2e7d32', '#388e3c', '#43a047']);
+      const huts = [];
+      for (let i = 0; i < 9; i++) huts.push({ x: between(R, 200, W - 200), y: between(R, 180, H - 180), s: between(R, 120, 160), a: between(R, -.4, .4) });
+      c.lineWidth = 4;
+      for (let i = 0; i < huts.length - 1; i++) {
+        const A = huts[i], B = huts[i + 1], len = Math.hypot(B.x - A.x, B.y - A.y), ang = Math.atan2(B.y - A.y, B.x - A.x);
+        c.save(); c.translate(A.x, A.y); c.rotate(ang);
+        c.fillStyle = '#c8a06a'; for (let d = 0; d < len; d += 18) c.fillRect(d, -12, 10, 24);
+        c.strokeStyle = '#6b4a2a'; c.beginPath(); c.moveTo(0, -14); c.lineTo(len, -14); c.moveTo(0, 14); c.lineTo(len, 14); c.stroke();
+        c.restore();
+      }
+      huts.forEach(h => {
+        c.save(); c.translate(h.x, h.y); c.rotate(h.a);
+        c.fillStyle = 'rgba(20,30,10,.3)'; c.fillRect(-h.s / 2 + 12, -h.s / 2 + 14, h.s, h.s);
+        planks(c, -h.s / 2, -h.s / 2, h.s, h.s, true, R, '#a8743f');
+        const r = h.s * 0.32, col = pick(R, [['#c8553d', '#a8432f'], ['#d9a441', '#b8862c'], ['#7a9e7e', '#5f8263']]);
+        c.fillStyle = col[0]; c.beginPath(); c.moveTo(-r, -r); c.lineTo(r, -r); c.lineTo(0, 0); c.fill();
+        c.fillStyle = col[1]; c.beginPath(); c.moveTo(r, -r); c.lineTo(r, r); c.lineTo(0, 0); c.fill();
+        c.fillStyle = col[0]; c.beginPath(); c.moveTo(r, r); c.lineTo(-r, r); c.lineTo(0, 0); c.fill();
+        c.fillStyle = col[1]; c.beginPath(); c.moveTo(-r, r); c.lineTo(-r, -r); c.lineTo(0, 0); c.fill();
+        c.restore();
+      });
+      for (let i = 0; i < 140; i++) { c.fillStyle = pick(R, ['#ff6b8b', '#ffd166', '#ffffff']); c.beginPath(); c.arc(R() * W, R() * H, between(R, 3, 6), 0, 6.283); c.fill(); }
+    },
   };
 
   // ---------------------------------------------------------------- bölüm düzeni
@@ -481,17 +561,24 @@
     cv.width = Math.round(L.W * k); cv.height = Math.round(L.H * k);
     const c = cv.getContext('2d');
     c.scale(k, k);
-    PAINTERS[L.paint](c, L.W, L.H, rng(L.seed));
+    paintScene(c, L);
     const res = { cv, k };
     bgCache.set(L.id, res);
     return res;
+  }
+
+  function paintScene(c, L) {
+    PAINTERS[L.paint](c, L.W, L.H, rng(L.seed));
+    if (L.tint) {
+      c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = L.tint; c.fillRect(0, 0, L.W, L.H); c.restore();
+    }
   }
 
   function drawThumb(L, canvas) {
     const c = canvas.getContext('2d');
     const s = Math.max(canvas.width / L.W, canvas.height / L.H);
     c.save(); c.scale(s, s);
-    PAINTERS[L.paint](c, L.W, L.H, rng(L.seed));
+    paintScene(c, L);
     buildLayout(L).objs.forEach(o => { c.save(); c.translate(o.x, o.y); c.rotate(o.rot); c.drawImage(sprite(o.e), -o.size / 2, -o.size / 2, o.size, o.size); c.restore(); });
     c.restore();
   }
@@ -973,10 +1060,10 @@
     category: 'sakli-nesne',
     featured: true,
     isNew: true,
-    short: '10 bölüm, 380+ eşya',
+    short: '15 bölüm, 570+ eşya',
     tags: ['saklı nesne', 'ada', 'bulmaca', 'dikkat', 'tek oyunculu', 'mobil'],
-    heroFacts: ['10 ada bölümü', '380+ saklı eşya', 'İpucu ve kombo', 'Mobilde de oynanır'],
-    description: 'Tropik bir adada dedektiflik yap. Kumsaldan mercan resifine, gizli mağaradan şelale vadisine ve gece festivaline kadar on kalabalık sahnede saklanan eşyaları bul. Bölümleri bitirdikçe yeni yerlerin kilidi açılır.',
+    heroFacts: ['15 ada bölümü', '570+ saklı eşya', 'İpucu ve kombo', 'Mobilde de oynanır'],
+    description: 'Tropik bir adada dedektiflik yap. Kumsaldan mercan resifine, gizli mağaradan şelale vadisine, volkan eteğinden ağaç ev köyüne kadar on beş kalabalık sahnede saklanan eşyaları bul. Bölümleri bitirdikçe yeni yerlerin kilidi açılır.',
     howTo: [
       'Haritadan açık bir bölüm seç.',
       'Alttaki listede aranacak eşyalar ve kaç tane kaldığı yazar.',
