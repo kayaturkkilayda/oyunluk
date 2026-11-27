@@ -1,6 +1,6 @@
 # Oyunluk — oyun sitesi
 
-Tarayıcıda, indirmeden oynanan oyunlar. İlk oyun: **Ada Dedektifi**, ada temalı saklı nesne oyunu (10 bölüm, 380+ eşya).
+Tarayıcıda, indirmeden oynanan oyunlar: **Ada Dedektifi** (ada temalı saklı nesne oyunu, 10 bölüm, 380+ eşya) ve **Farkı Bul** (iki resim, 7 fark, 10 bölüm).
 
 Sade HTML + CSS + JavaScript. Derleme aracı, framework veya sunucu kodu yok.
 
@@ -35,6 +35,9 @@ Portal.register({
 
 ## Ada Dedektifi'ne bölüm eklemek
 `games/ada-dedektifi/game.js` içinde `LEVELS` dizisine yeni kayıt (ad, zorluk, boyut, aranacak eşyalar, şaşırtmaca eşyalar) ve `PAINTERS` içine sahneyi çizen bir fonksiyon ekle.
+
+## Farkı Bul'a bölüm eklemek
+`games/farki-bul/game.js` içinde `SCENES` nesnesine sahneyi kuran bir fonksiyon (arka plan + nesne listesi) ve `LEVELS` dizisine bir kayıt (ad, zorluk, sahne, seed, en küçük fark boyutu, 3 yıldız süresi) ekleyin. 7 fark sahnedeki nesnelerden otomatik seçilir; `seed` değiştirmek farklı farklar üretir.
 
 ## Yerelde çalıştırma
 ```
