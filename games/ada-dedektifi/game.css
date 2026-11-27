@@ -70,7 +70,7 @@
 .ad-item { flex: none; width: 64px; height: 64px; border-radius: 14px; background: #fff; position: relative; display: grid; place-items: center; font-size: 2rem; line-height: 1; box-shadow: 0 3px 0 #ead7ad; transition: transform .15s ease, background .15s ease; font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif; }
 .ad-item .ad-n { position: absolute; right: -4px; bottom: -4px; min-width: 24px; height: 24px; border-radius: 12px; background: var(--ad-sea); color: #fff; font: 800 .8rem "Nunito", sans-serif; display: grid; place-items: center; padding: 0 6px; border: 2px solid #fff; font-variant-numeric: tabular-nums; }
 .ad-item.sel { background: #fff0c2; box-shadow: 0 0 0 3px var(--ad-sun), 0 3px 0 #ead7ad; }
-.ad-item.done { opacity: .45; }
+.ad-item.done { opacity: .45; order: 1; } /* bitenler sağa, kalanlar solda */
 .ad-item.done .ad-n { background: var(--ad-ok); }
 .ad-item.bump { transform: scale(1.18); }
 .ad-fly { position: absolute; z-index: 5; font-size: 2rem; pointer-events: none; transition: transform .6s cubic-bezier(.5,-0.2,.6,1), opacity .6s ease; font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif; }
