@@ -53,9 +53,11 @@
     ['🎲', '🧩', '🎮'], ['🌕', '🌖', '🌗', '🌘'], ['🛸', '🚀', '🛰️'], ['🦊', '🐿️', '🦔'], ['🐞', '🦋', '🐝', '🐌'], ['🍄', '🌰'],
     ['🦌', '🐧'], ['🛷', '🎿', '⛸️'], ['🍯', '🧂', '🥫'], ['🥄', '🍴'], ['🎁', '📦'], ['🌷', '🌻', '🌼', '🌹'], ['🦉', '🕊️'],
     ['🚲', '🛵'], ['📚', '✏️', '🎨'], ['🥁', '🎺', '🎸'], ['🍲', '🍳'], ['🥪', '🍉', '🥧'], ['🐬', '🐳'], ['👽', '☄️'], ['🌍', '🪐'], ['🕶️', '🧢', '👒'],
+    ['🎠', '🎪', '🎢'], ['🍭', '🍬', '🍫'], ['🍿', '🌭', '🥨'], ['🐪', '🐫'], ['🦂', '🦎', '🐍'], ['🍂', '🍁'], ['🥬', '🥦', '🥒'], ['🧅', '🥔', '🎃'],
+    ['🐸', '🐌'], ['🧤', '🧣'], ['❄️', '⭐'], ['📏', '📐', '✂️'], ['🏆', '🎺'], ['🦅', '🕊️', '🐦'], ['✈️', '🚁'], ['🛍️', '🎁'], ['🥖', '🥐'], ['🍮', '🥧'], ['🔥', '🔦'], ['🎒', '🥾'],
   ];
   const ASYM = new Set(['🐄', '🐖', '🐑', '🐐', '🐓', '🐤', '🦆', '🐦', '🐕', '🐈', '🐇', '🚜', '🐬', '🐳', '🕊️', '🐢', '🐡', '🐠', '🚂', '🚗', '🚌', '🚕', '🚓',
-    '🚀', '🛰️', '🦖', '🦊', '🐿️', '🦔', '🐌', '🦌', '🛷', '🚲', '🛵', '🍌', '🥕', '🎺', '🎸', '✏️', '🧃', '🌖', '🌗', '🌘', '🐝', '☄️', '🛸', '🥄', '🎨', '🧢', '☕']);
+    '🚀', '🛰️', '🦖', '🦊', '🐿️', '🦔', '🐌', '🦌', '🛷', '🚲', '🛵', '🍌', '🥕', '🎺', '🎸', '✏️', '🧃', '🌖', '🌗', '🌘', '🐝', '☄️', '🛸', '🥄', '🎨', '🧢', '☕', '🐪', '🐫', '🦎', '🐍', '🦂', '🦅', '✈️', '🚁', '🐸', '🎒', '🐻', '🥖', '🛍️']);
   const swapGroup = e => SWAP.find(g => g.includes(e));
   const spriteCache = new Map();
   function sprite(e, px) {
@@ -350,6 +352,93 @@
         ell(c, 0.06 * s, 0.1 * s, 0.07 * s, 0.03 * s, o.col, -0.6); ell(c, -0.06 * s, -0.15 * s, 0.07 * s, 0.03 * s, o.col, 0.6);
       },
     },
+    airballoon: {
+      box: [0.7, 1], colors: { col: 'main', col2: 'main' }, num: [2, 5],
+      draw(c, o, s) {
+        c.strokeStyle = '#6b4a2a'; c.lineWidth = 0.015 * s;
+        c.beginPath(); c.moveTo(-0.16 * s, 0.14 * s); c.lineTo(-0.08 * s, 0.36 * s); c.moveTo(0.16 * s, 0.14 * s); c.lineTo(0.08 * s, 0.36 * s); c.stroke();
+        rrect(c, -0.1 * s, 0.34 * s, 0.2 * s, 0.16 * s, 0.03 * s, '#a86b3c');
+        c.save(); c.beginPath(); c.moveTo(-0.17 * s, 0.14 * s); c.bezierCurveTo(-0.5 * s, -0.1 * s, -0.4 * s, -0.5 * s, 0, -0.5 * s); c.bezierCurveTo(0.4 * s, -0.5 * s, 0.5 * s, -0.1 * s, 0.17 * s, 0.14 * s); c.closePath();
+        c.fillStyle = o.col; c.fill(); c.clip();
+        c.fillStyle = o.col2; const w = 0.7 * s / (o.n * 2 + 1);
+        for (let i = 0; i < o.n; i++) c.fillRect(-0.35 * s + (2 * i + 1) * w, -0.5 * s, w, 0.7 * s);
+        c.restore();
+        ell(c, -0.14 * s, -0.3 * s, 0.05 * s, 0.1 * s, 'rgba(255,255,255,.3)', 0.4);
+      },
+    },
+    wheel: {
+      box: [1, 1], colors: { col: 'main' }, num: [6, 10],
+      draw(c, o, s) {
+        c.strokeStyle = '#5b5b6b'; c.lineWidth = 0.03 * s;
+        c.beginPath(); c.moveTo(0, 0); c.lineTo(-0.28 * s, 0.5 * s); c.moveTo(0, 0); c.lineTo(0.28 * s, 0.5 * s); c.stroke();
+        c.lineWidth = 0.02 * s; c.beginPath(); c.arc(0, 0, 0.36 * s, 0, TAU); c.stroke();
+        for (let i = 0; i < o.n; i++) { const a = i / o.n * TAU; c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(a) * 0.36 * s, Math.sin(a) * 0.36 * s); c.stroke(); }
+        for (let i = 0; i < o.n; i++) { const a = i / o.n * TAU; rrect(c, Math.cos(a) * 0.36 * s - 0.06 * s, Math.sin(a) * 0.36 * s - 0.02 * s, 0.12 * s, 0.1 * s, 0.03 * s, i % 2 ? o.col : '#ffffff'); }
+        circ(c, 0, 0, 0.05 * s, '#5b5b6b');
+      },
+    },
+    tent: {
+      box: [1, 0.8], asym: true, colors: { col: 'main' }, parts: ['flag', 'door'],
+      draw(c, o, s) {
+        poly(c, [[-0.5 * s, 0.4 * s], [0, -0.3 * s], [0.5 * s, 0.4 * s]], o.col);
+        poly(c, [[0, -0.3 * s], [0.5 * s, 0.4 * s], [0.2 * s, 0.4 * s]], 'rgba(0,0,0,.15)');
+        if (o.door) poly(c, [[-0.14 * s, 0.4 * s], [0, 0.1 * s], [0.14 * s, 0.4 * s]], '#3b2a1a');
+        c.fillStyle = '#6b4a2a'; c.fillRect(-0.015 * s, -0.4 * s, 0.03 * s, 0.12 * s);
+        if (o.flag) poly(c, [[0.015 * s, -0.4 * s], [0.2 * s, -0.36 * s], [0.015 * s, -0.31 * s]], '#ffc845');
+      },
+    },
+    cactus: {
+      box: [0.7, 1], parts: ['armL', 'armR', 'bloom'],
+      draw(c, o, s) {
+        const g = '#3f9a52';
+        rrect(c, -0.1 * s, -0.42 * s, 0.2 * s, 0.92 * s, 0.1 * s, g);
+        if (o.armL) { rrect(c, -0.32 * s, -0.1 * s, 0.24 * s, 0.1 * s, 0.05 * s, g); rrect(c, -0.32 * s, -0.3 * s, 0.1 * s, 0.3 * s, 0.05 * s, g); }
+        if (o.armR) { rrect(c, 0.08 * s, 0.04 * s, 0.24 * s, 0.1 * s, 0.05 * s, g); rrect(c, 0.22 * s, -0.18 * s, 0.1 * s, 0.32 * s, 0.05 * s, g); }
+        c.strokeStyle = 'rgba(255,255,255,.3)'; c.lineWidth = 0.015 * s; c.beginPath(); c.moveTo(0, -0.38 * s); c.lineTo(0, 0.46 * s); c.stroke();
+        if (o.bloom) { for (let i = 0; i < 5; i++) { const a = i / 5 * TAU; circ(c, Math.cos(a) * 0.05 * s, -0.44 * s + Math.sin(a) * 0.05 * s, 0.04 * s, '#ff8fab'); } circ(c, 0, -0.44 * s, 0.03 * s, '#ffd23f'); }
+      },
+    },
+    umbrella: {
+      box: [1, 1], asym: true, colors: { col: 'main' },
+      draw(c, o, s) {
+        c.strokeStyle = '#3b3b3b'; c.lineWidth = 0.035 * s; c.lineCap = 'round';
+        c.beginPath(); c.moveTo(0, -0.1 * s); c.lineTo(0, 0.38 * s); c.arc(0.08 * s, 0.38 * s, 0.08 * s, Math.PI, 0, true); c.stroke();
+        c.beginPath(); c.moveTo(-0.48 * s, -0.05 * s); c.quadraticCurveTo(-0.45 * s, -0.48 * s, 0, -0.48 * s); c.quadraticCurveTo(0.45 * s, -0.48 * s, 0.48 * s, -0.05 * s);
+        for (let i = 3; i >= 0; i--) { const x0 = -0.48 * s + (i + 1) * 0.24 * s; c.quadraticCurveTo(x0 - 0.12 * s, -0.14 * s, x0 - 0.24 * s, -0.05 * s); }
+        c.fillStyle = o.col; c.fill();
+        c.fillStyle = 'rgba(255,255,255,.25)'; c.beginPath(); c.moveTo(0, -0.48 * s); c.quadraticCurveTo(-0.1 * s, -0.25 * s, -0.12 * s, -0.08 * s); c.lineTo(0.12 * s, -0.08 * s); c.quadraticCurveTo(0.1 * s, -0.25 * s, 0, -0.48 * s); c.fill();
+      },
+    },
+    bench: {
+      box: [1, 0.5], colors: { col: 'main' },
+      draw(c, o, s) {
+        c.fillStyle = '#3b3b4f'; c.fillRect(-0.4 * s, 0.05 * s, 0.05 * s, 0.2 * s); c.fillRect(0.35 * s, 0.05 * s, 0.05 * s, 0.2 * s);
+        [-0.22, -0.11, 0.0].forEach(y => rrect(c, -0.5 * s, y * s, s, 0.08 * s, 0.02 * s, o.col));
+        c.fillStyle = 'rgba(0,0,0,.15)'; c.fillRect(-0.5 * s, 0.06 * s, s, 0.02 * s);
+      },
+    },
+    igloo: {
+      box: [1, 0.6], asym: true, parts: ['door'],
+      draw(c, o, s) {
+        c.beginPath(); c.arc(0, 0.3 * s, 0.48 * s, Math.PI, 0); c.closePath(); c.fillStyle = '#f2f8ff'; c.fill();
+        c.strokeStyle = '#b8cde6'; c.lineWidth = 0.015 * s;
+        [0.18, 0.06, -0.06].forEach(y => { c.beginPath(); const r = Math.sqrt(Math.max(0, 0.48 * 0.48 - (0.3 - y) * (0.3 - y))) * s; c.moveTo(-r, y * s); c.lineTo(r, y * s); c.stroke(); });
+        c.beginPath(); c.arc(0, 0.3 * s, 0.48 * s, Math.PI, 0); c.stroke();
+        if (o.door) { c.beginPath(); c.arc(0.22 * s, 0.3 * s, 0.13 * s, Math.PI, 0); c.closePath(); c.fillStyle = '#3a4a6b'; c.fill(); }
+      },
+    },
+    board: {
+      box: [1, 0.7], parts: ['sum', 'sun', 'star'],
+      draw(c, o, s) {
+        c.fillStyle = '#8a5a2b'; c.fillRect(-0.5 * s, -0.35 * s, s, 0.7 * s);
+        c.fillStyle = '#2f5a45'; c.fillRect(-0.46 * s, -0.31 * s, 0.92 * s, 0.62 * s);
+        c.strokeStyle = '#f4f1ea'; c.fillStyle = '#f4f1ea'; c.lineWidth = 0.015 * s; c.lineCap = 'round';
+        if (o.sum) { c.font = `700 ${0.13 * s}px Nunito, sans-serif`; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText('2 + 3 = 5', -0.4 * s, -0.16 * s); }
+        if (o.sun) { c.beginPath(); c.arc(0.28 * s, -0.12 * s, 0.07 * s, 0, TAU); c.stroke(); for (let i = 0; i < 8; i++) { const a = i / 8 * TAU; c.beginPath(); c.moveTo(0.28 * s + Math.cos(a) * 0.1 * s, -0.12 * s + Math.sin(a) * 0.1 * s); c.lineTo(0.28 * s + Math.cos(a) * 0.14 * s, -0.12 * s + Math.sin(a) * 0.14 * s); c.stroke(); } }
+        if (o.star) { c.beginPath(); for (let i = 0; i <= 10; i++) { const a = i / 10 * TAU - Math.PI / 2, r = (i % 2 ? 0.04 : 0.1) * s; const x = -0.25 * s + Math.cos(a) * r, y = 0.13 * s + Math.sin(a) * r; i ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke(); }
+        c.fillStyle = '#f4f1ea'; c.fillRect(0.2 * s, 0.24 * s, 0.1 * s, 0.03 * s);
+      },
+    },
     rect: { box: o => [o.w, o.h], noDiff: true, draw(c, o) { rrect(c, -o.w / 2, -o.h / 2, o.w, o.h, o.r || 0, o.col); if (o.edge) { c.fillStyle = o.edge; c.fillRect(-o.w / 2, -o.h / 2, o.w, Math.min(10, o.h * 0.25)); } } },
     check: {
       box: o => [o.w, o.h], noDiff: true,
@@ -608,6 +697,176 @@
       B.many(6, [20, 260, 880, 590], () => ({ k: 'flower', s: between(R, 40, 52), col: pick(R, PAL.petal) }));
       return { bg, objs: B.objs };
     },
+    lunapark(R) {
+      const B = builder(R);
+      const bg = (c, r) => {
+        skyGrad(c, '#ffb3c7', '#ffe9b8', H * 0.6);
+        c.fillStyle = '#9bd17a'; c.fillRect(0, H * 0.6, W, H);
+        c.fillStyle = '#e8d3a8'; c.fillRect(0, H * 0.7, W, 70);
+        dots(c, r, 200, [0, H * 0.6, W, H], ['#8bc46a', '#acdc8a'], 1, 3);
+        for (let i = 0; i < 6; i++) { const x = 60 + i * 160; poly(c, [[x - 40, H * 0.6], [x, H * 0.48], [x + 40, H * 0.6]], PAL.main[i % 8]); }
+      };
+      B.add({ k: 'wheel', x: 690, y: 210, s: 300, col: '#e8453c', n: 8 });
+      B.many(3, [40, 30, 520, 120], () => ({ k: 'cloud', s: between(R, 100, 130) }));
+      B.many(5, [40, 120, 520, 330], () => ({ k: 'balloon', s: between(R, 70, 90), col: pick(R, PAL.main) }));
+      B.many(3, [40, 380, 860, 590], () => em(R, ['🎠', '🎪', '🎢'], 70, 84));
+      B.many(10, [20, 360, 880, 590], () => em(R, ['🍭', '🍬', '🍫', '🍿', '🌭', '🥨', '🎈', '🧸', '🎟️', '🍦'], 36, 50));
+      B.many(2, [40, 370, 860, 590], () => ({ k: 'bench', s: between(R, 90, 110), col: pick(R, PAL.main) }));
+      return { bg, objs: B.objs };
+    },
+    kamp(R) {
+      const B = builder(R);
+      const lake = H * 0.5;
+      const bg = (c, r) => {
+        skyGrad(c, '#ff9a6b', '#ffe1a8', lake);
+        c.fillStyle = '#4b6d8a'; poly(c, [[0, lake], [160, 170], [320, lake]]); c.fill(); poly(c, [[220, lake], [430, 130], [640, lake]], '#5c7f9c'); poly(c, [[520, lake], [740, 180], [W, lake]], '#4b6d8a');
+        poly(c, [[430, 130], [470, 180], [390, 180]], '#ffffff');
+        c.fillStyle = '#4a9bc4'; c.fillRect(0, lake, W, 110);
+        c.strokeStyle = 'rgba(255,255,255,.4)'; c.lineWidth = 2; for (let i = 0; i < 30; i++) { const x = r() * W, y = between(r, lake + 8, lake + 100); c.beginPath(); c.moveTo(x, y); c.lineTo(x + 26, y); c.stroke(); }
+        c.fillStyle = '#6fb24f'; c.fillRect(0, lake + 110, W, H);
+        dots(c, r, 220, [0, lake + 115, W, H], ['#5fa242', '#82c462'], 1, 3);
+      };
+      B.add({ k: 'sun', x: 120, y: 70, s: 90, col: '#ffc845', n: 10, face: false });
+      B.many(2, [60, lake + 20, 860, lake + 90], () => ({ k: 'boat', s: between(R, 80, 100), col: pick(R, PAL.main), col2: pick(R, PAL.sail), flag: R() < 0.5, flip: R() < 0.5 }));
+      B.many(2, [60, lake + 20, 860, lake + 100], () => em(R, ['🦆', '🐟'], 36, 44));
+      B.many(3, [40, lake + 150, 860, H - 50], () => ({ k: 'tent', s: between(R, 120, 150), col: pick(R, PAL.main), flag: R() < 0.6, door: true, flip: R() < 0.5 }));
+      B.many(5, [20, lake + 120, 880, H - 40], () => ({ k: 'pine', s: between(R, 100, 130), snow: false }));
+      B.many(9, [20, lake + 130, 880, H - 16], () => em(R, ['🔥', '🎒', '🔦', '🧭', '🍄', '🦔', '🐿️', '🦉', '🌲', '🥾', '🌰'], 34, 48));
+      return { bg, objs: B.objs };
+    },
+    pastane(R) {
+      const B = builder(R);
+      const bg = (c) => {
+        c.fillStyle = '#ffe9ef'; c.fillRect(0, 0, W, H);
+        for (let x = 0; x < W; x += 60) { c.fillStyle = (x / 60) % 2 ? '#ffd5e0' : '#ffe9ef'; c.fillRect(x, 0, 60, 70); }
+        for (let i = 0; i < 16; i++) { const x = i * 60 + 30; c.beginPath(); c.arc(x, 70, 30, 0, Math.PI); c.fillStyle = i % 2 ? '#ffd5e0' : '#ff8fab'; c.fill(); }
+        c.fillStyle = '#d9a066'; c.fillRect(0, H * 0.82, W, H);
+        c.fillStyle = 'rgba(255,255,255,.35)'; c.fillRect(40, 120, W - 80, H * 0.68);
+      };
+      [210, 340, 470].forEach(y => B.add({ k: 'rect', x: 450, y, w: 800, h: 14, col: '#a86b3c', layer: true }));
+      B.many(6, [70, 160, 830, 172], () => em(R, ['🎂', '🍰', '🧁', '🍩', '🍪', '🥧', '🍮'], 50, 58), 4);
+      B.many(6, [70, 290, 830, 302], () => em(R, ['🥐', '🍞', '🥨', '🥖', '🧀', '🍩'], 50, 58), 4);
+      B.many(6, [70, 420, 830, 432], () => em(R, ['🍫', '🍬', '🍭', '🍓', '🍒', '🍪', '☕'], 48, 56), 4);
+      B.add({ k: 'clock', x: 820, y: 40, s: 64, col: '#9b59d0', h: 0.4, m: -Math.PI / 2 });
+      B.many(4, [30, H * 0.83, 870, H - 14], () => em(R, ['🐈', '🧺', '🛍️', '🌷'], 38, 48));
+      return { bg, objs: B.objs };
+    },
+    sinif(R) {
+      const B = builder(R);
+      const floor = H * 0.62;
+      const bg = (c) => {
+        c.fillStyle = '#fff1d6'; c.fillRect(0, 0, W, floor);
+        c.fillStyle = '#e6c9a0'; c.fillRect(0, floor - 60, W, 60);
+        c.fillStyle = '#c9915c'; c.fillRect(0, floor, W, H);
+        c.strokeStyle = 'rgba(90,50,20,.2)'; c.lineWidth = 2; for (let x = 0; x < W; x += 70) { c.beginPath(); c.moveTo(x, floor); c.lineTo(x - 60, H); c.stroke(); }
+      };
+      B.add({ k: 'board', x: 430, y: 160, s: 360, sum: true, sun: true, star: true });
+      B.add({ k: 'clock', x: 720, y: 70, s: 80, col: '#e8453c', h: Math.PI * 0.1, m: -Math.PI / 2 });
+      B.add({ k: 'window', x: 110, y: 160, s: 170, col: '#2f7fd6', pot: true });
+      B.add({ k: 'frame', x: 790, y: 210, s: 120, col: '#dcf5c4', sun: true });
+      for (let i = 0; i < 3; i++) B.add({ k: 'rect', x: 170 + i * 280, y: 470, w: 220, h: 90, col: '#b97a45', edge: '#d9a066', r: 6, layer: true });
+      for (let i = 0; i < 3; i++) B.many(3, [80 + i * 280, 455, 260 + i * 280, 485], () => em(R, ['📚', '✏️', '🎨', '🍎', '📏', '🖍️', '📐', '🎒', '🌍', '✂️'], 40, 50), 3);
+      B.many(4, [20, 300, 880, 340], () => em(R, ['🌍', '🎒', '🌵', '🐠', '🏆', '🎺'], 44, 54));
+      B.many(3, [20, floor + 20, 880, H - 16], () => em(R, ['⚽', '🏀', '🎒', '📚'], 36, 46));
+      return { bg, objs: B.objs };
+    },
+    col(R) {
+      const B = builder(R);
+      const bg = (c, r) => {
+        skyGrad(c, '#ffcf70', '#fff3c9', H * 0.5);
+        poly(c, [[480, H * 0.5], [600, 140], [720, H * 0.5]], '#e3b467'); poly(c, [[600, 140], [720, H * 0.5], [650, H * 0.5]], '#c9974f');
+        poly(c, [[680, H * 0.5], [760, 220], [840, H * 0.5]], '#e3b467'); poly(c, [[760, 220], [840, H * 0.5], [800, H * 0.5]], '#c9974f');
+        c.fillStyle = '#f0cf8a'; c.beginPath(); c.moveTo(0, H * 0.48); for (let x = 0; x <= W; x += 30) c.lineTo(x, H * 0.48 + Math.sin(x / 120) * 18); c.lineTo(W, H); c.lineTo(0, H); c.fill();
+        c.strokeStyle = 'rgba(180,130,60,.3)'; c.lineWidth = 3; for (let i = 0; i < 16; i++) { const x = r() * W, y = between(r, H * 0.55, H); c.beginPath(); c.moveTo(x, y); c.quadraticCurveTo(x + 40, y - 10, x + 80, y); c.stroke(); }
+        ell(c, 170, H * 0.62, 130, 34, '#3ab0d0');
+      };
+      B.add({ k: 'sun', x: 110, y: 80, s: 110, col: '#ff8c2a', n: 12, face: false });
+      B.many(5, [20, 220, 880, 560], () => ({ k: 'cactus', s: between(R, 90, 130), armL: R() < 0.7, armR: R() < 0.7, bloom: R() < 0.5 }));
+      B.many(2, [40, 250, 860, 420], () => ({ k: 'tree', s: between(R, 110, 130), col: '#3c9a45', apples: false }));
+      B.many(2, [40, 300, 860, 560], () => em(R, ['🐪', '🐫'], 70, 84));
+      B.many(9, [20, 320, 880, 590], () => em(R, ['🦂', '🦎', '🐍', '🌴', '🏺', '🧭', '💎', '🐚', '🌵'], 34, 48));
+      B.many(2, [200, 30, 880, 160], () => em(R, ['🦅', '🕊️'], 36, 44));
+      return { bg, objs: B.objs };
+    },
+    sonbahar(R) {
+      const B = builder(R);
+      const bg = (c, r) => {
+        skyGrad(c, '#9fc9e8', '#f1e6d0', H * 0.45);
+        c.fillStyle = '#b5a55a'; c.fillRect(0, H * 0.42, W, H);
+        dots(c, r, 500, [0, H * 0.42, W, H], ['#e88b2a', '#d24b3e', '#d9c23a', '#a5602a'], 2, 5);
+        c.strokeStyle = '#c9b48a'; c.lineWidth = 50; c.lineCap = 'round'; c.beginPath(); c.moveTo(-20, H * 0.75); c.bezierCurveTo(300, H * 0.6, 600, H * 0.95, W + 20, H * 0.7); c.stroke();
+      };
+      B.many(2, [60, 30, 840, 130], () => ({ k: 'cloud', s: between(R, 110, 140) }));
+      B.many(6, [20, 140, 880, 330], () => ({ k: 'tree', s: between(R, 130, 170), col: pick(R, ['#e88b2a', '#d24b3e', '#d9c23a', '#3c9a45']), apples: R() < 0.3 }), 4);
+      B.many(2, [40, 330, 860, 560], () => ({ k: 'bench', s: between(R, 110, 130), col: pick(R, ['#8a5a2b', '#2f7fd6', '#47b05a']) }));
+      B.many(2, [20, 300, 880, 560], () => ({ k: 'lamp', s: between(R, 110, 130), lit: false }));
+      B.many(12, [20, 300, 880, 590], () => em(R, ['🍂', '🍁', '🐿️', '🦔', '🌰', '🍄', '🎃', '🐦', '🐕', '🍎', '🍐', '☂️'], 32, 46));
+      return { bg, objs: B.objs };
+    },
+    bostan(R) {
+      const B = builder(R);
+      const bg = (c, r) => {
+        skyGrad(c, '#8fd3ff', '#e8f7ff', H * 0.3);
+        c.fillStyle = '#86c95f'; c.fillRect(0, H * 0.3, W, H);
+        for (let i = 0; i < 4; i++) { const y = H * 0.4 + i * 90; c.fillStyle = '#8a5a3a'; c.fillRect(30, y, W - 60, 46); dots(c, r, 60, [30, y, W - 30, y + 46], ['#6b4428', '#a06c48'], 1, 3); }
+      };
+      B.add({ k: 'sun', x: 820, y: 60, s: 90, col: '#ffc845', n: 12, face: true });
+      B.add({ k: 'house', x: 110, y: 110, s: 130, col: '#ffe0b2', col2: '#c9503a', dc: '#47b05a', chim: true, win1: true, win2: true });
+      B.add({ k: 'fence', x: 520, y: 140, s: 50, n: 9, col: '#8a5a2b' });
+      B.many(2, [250, 20, 740, 90], () => ({ k: 'cloud', s: between(R, 100, 120) }));
+      for (let i = 0; i < 4; i++) B.many(5, [50, H * 0.4 + i * 90 + 10, 850, H * 0.4 + i * 90 + 30], () => em(R, ['🥕', '🥬', '🥦', '🍅', '🌽', '🥒', '🍆', '🧅', '🥔', '🎃', '🍓'], 40, 50), 6);
+      B.many(4, [20, 180, 880, 590], () => em(R, ['🐌', '🐞', '🦋', '🐝', '🐇', '🐓', '🧺', '🌻'], 34, 44));
+      return { bg, objs: B.objs };
+    },
+    kutup(R) {
+      const B = builder(R);
+      const bg = (c, r) => {
+        skyGrad(c, '#0f1f45', '#2a6d8a', H * 0.5);
+        c.strokeStyle = 'rgba(120,255,190,.25)'; c.lineWidth = 30;
+        for (let i = 0; i < 3; i++) { c.beginPath(); c.moveTo(0, 80 + i * 40); c.bezierCurveTo(300, 20 + i * 50, 600, 160 + i * 30, W, 60 + i * 40); c.stroke(); }
+        dots(c, r, 60, [0, 0, W, H * 0.4], ['#ffffff'], 0.5, 1.4);
+        c.fillStyle = '#1d4f78'; c.fillRect(0, H * 0.5, W, 80);
+        c.fillStyle = '#eef6ff'; c.beginPath(); c.moveTo(0, H * 0.6); for (let x = 0; x <= W; x += 40) c.lineTo(x, H * 0.62 + Math.sin(x / 50) * 8); c.lineTo(W, H); c.lineTo(0, H); c.fill();
+        for (let i = 0; i < 5; i++) { const x = between(r, 0, W); poly(c, [[x, H * 0.57], [x + 30, H * 0.5 - 10], [x + 70, H * 0.57]], '#dbeafa'); }
+      };
+      B.add({ k: 'moon', x: 800, y: 80, s: 80 });
+      B.many(4, [40, 30, 760, 180], () => ({ k: 'star', s: between(R, 28, 38), col: '#ffffff' }));
+      B.many(2, [40, 330, 860, 470], () => ({ k: 'igloo', s: between(R, 150, 180), door: true, flip: R() < 0.5 }));
+      B.many(2, [40, 360, 860, 560], () => ({ k: 'snowman', s: between(R, 100, 120), col: pick(R, PAL.main), hat: R() < 0.6, n: 3 }));
+      B.many(2, [40, H * 0.5 + 10, 860, H * 0.5 + 60], () => em(R, ['🐳', '🐬', '🐟'], 40, 50));
+      B.many(10, [20, 370, 880, 590], () => em(R, ['🐧', '🦌', '🐟', '🎿', '🛷', '❄️', '🧤', '🧣', '⛸️', '🐻'], 34, 48));
+      return { bg, objs: B.objs };
+    },
+    balonlar(R) {
+      const B = builder(R);
+      const bg = (c, r) => {
+        skyGrad(c, '#5fb8ff', '#fff0d0', H * 0.8);
+        hill(c, 200, H * 0.95, 400, 120, '#7cc860'); hill(c, 700, H, 380, 130, '#6db850');
+        c.fillStyle = '#6db850'; c.fillRect(0, H * 0.92, W, H);
+      };
+      B.many(7, [40, 40, 860, 470], () => ({ k: 'airballoon', s: between(R, 110, 160), col: pick(R, PAL.main), col2: pick(R, PAL.main), n: 3 }), 10);
+      B.many(4, [20, 20, 880, 520], () => ({ k: 'cloud', s: between(R, 90, 130) }));
+      B.many(7, [20, 20, 880, 540], () => em(R, ['🕊️', '🦅', '🐦', '🪁', '🎈', '✈️', '🚁'], 32, 44));
+      B.many(4, [20, 530, 880, 590], () => em(R, ['🏠', '🌳', '🐄', '🐑'], 32, 40));
+      return { bg, objs: B.objs };
+    },
+    yagmur(R) {
+      const B = builder(R);
+      const bg = (c, r) => {
+        skyGrad(c, '#6f7f96', '#b9c4d2', H * 0.5);
+        c.fillStyle = '#4a5468'; for (let x = 0; x < W; x += 70) { const h = between(r, 80, 180); c.fillRect(x, H * 0.5 - h, 64, h); }
+        c.fillStyle = '#7c8794'; c.fillRect(0, H * 0.5, W, H);
+        c.fillStyle = '#9aa4b0'; c.fillRect(0, H * 0.5, W, 30);
+        for (let i = 0; i < 6; i++) ell(c, between(r, 40, W - 40), between(r, H * 0.62, H - 30), between(r, 50, 90), between(r, 14, 22), 'rgba(140,190,230,.6)');
+        c.strokeStyle = 'rgba(220,235,255,.55)'; c.lineWidth = 2; for (let i = 0; i < 180; i++) { const x = r() * W, y = r() * H; c.beginPath(); c.moveTo(x, y); c.lineTo(x - 6, y + 18); c.stroke(); }
+      };
+      B.many(3, [40, 20, 860, 140], () => ({ k: 'cloud', s: between(R, 130, 170), col: '#e3e8ee' }));
+      B.many(6, [30, 260, 870, 560], () => ({ k: 'umbrella', s: between(R, 80, 110), col: pick(R, PAL.main), flip: R() < 0.5 }));
+      B.many(2, [20, 260, 880, 400], () => ({ k: 'lamp', s: between(R, 110, 130), lit: true }));
+      B.many(2, [40, 420, 860, 590], () => ({ k: 'car', s: between(R, 90, 110), col: pick(R, PAL.main), flip: R() < 0.5 }));
+      B.many(9, [20, 300, 880, 590], () => em(R, ['🐸', '🦆', '🐌', '🐕', '🥾', '🚲', '☔', '🌂', '🐈'], 32, 46));
+      return { bg, objs: B.objs };
+    },
   };
 
   // ---------------------------------------------------------------- bölümler
@@ -615,6 +874,7 @@
     Kolay: { remove: 4, add: 2, color: 4, swap: 3, flip: 1, scale: 2, part: 1, num: 1, custom: 1 },
     Orta: { remove: 3, add: 2, color: 3, swap: 3, flip: 2, scale: 2, part: 2, num: 2, custom: 2 },
     Zor: { remove: 2, add: 1, color: 2, swap: 2, flip: 3, scale: 2, part: 3, num: 3, custom: 3 },
+    Uzman: { remove: 1, add: 1, color: 2, swap: 2, flip: 3, scale: 1, part: 4, num: 4, custom: 4 },
   };
   const LEVELS = [
     { id: 'ciftlik', name: 'Çiftlik Sabahı', diff: 'Kolay', scene: 'ciftlik', seed: 101, minS: 44, par: 60 },
@@ -627,6 +887,16 @@
     { id: 'uzay', name: 'Uzay Yolculuğu', diff: 'Zor', scene: 'uzay', seed: 808, minS: 28, par: 105 },
     { id: 'sehir', name: 'Gece Şehri', diff: 'Zor', scene: 'sehir', seed: 909, minS: 26, par: 110 },
     { id: 'piknik', name: 'Orman Pikniği', diff: 'Zor', scene: 'piknik', seed: 1001, minS: 30, par: 120 },
+    { id: 'lunapark', name: 'Lunapark', diff: 'Orta', scene: 'lunapark', seed: 1101, minS: 34, par: 90 },
+    { id: 'kamp', name: 'Göl Kenarında Kamp', diff: 'Orta', scene: 'kamp', seed: 1202, minS: 34, par: 95 },
+    { id: 'pastane', name: 'Pastane Vitrini', diff: 'Orta', scene: 'pastane', seed: 1303, minS: 34, par: 95 },
+    { id: 'sinif', name: 'Sınıfta Bir Gün', diff: 'Zor', scene: 'sinif', seed: 1404, minS: 30, par: 105 },
+    { id: 'col', name: 'Çöl Vahası', diff: 'Zor', scene: 'col', seed: 1505, minS: 30, par: 110 },
+    { id: 'sonbahar', name: 'Sonbahar Parkı', diff: 'Zor', scene: 'sonbahar', seed: 1606, minS: 28, par: 115 },
+    { id: 'bostan', name: 'Sebze Bahçesi', diff: 'Zor', scene: 'bostan', seed: 1707, minS: 28, par: 120 },
+    { id: 'kutup', name: 'Kutup Gecesi', diff: 'Uzman', scene: 'kutup', seed: 1808, minS: 26, par: 120 },
+    { id: 'balonlar', name: 'Balon Festivali', diff: 'Uzman', scene: 'balonlar', seed: 1909, minS: 26, par: 125 },
+    { id: 'yagmur', name: 'Yağmurlu Sokak', diff: 'Uzman', scene: 'yagmur', seed: 2002, minS: 24, par: 130 },
   ];
 
   function mutations(o) {
@@ -1083,10 +1353,10 @@
     title: 'Farkı Bul',
     category: 'sakli-nesne',
     isNew: true,
-    short: '10 bölüm, 7 fark',
+    short: '20 bölüm, 7 fark',
     tags: ['fark bulma', '7 fark', 'dikkat', 'resim', 'bulmaca', 'tek oyunculu', 'mobil'],
-    heroFacts: ['10 bölüm', 'Her resimde 7 fark', 'İpucu ve kombo', 'Mobilde de oynanır'],
-    description: 'Yan yana duran iki resim ilk bakışta aynı görünür, ama aralarında tam 7 fark var. Çiftlikten su altına, karlı köyden uzaya ve gece şehrine kadar 10 bölümde rengi değişen, kaybolan, yön değiştiren ya da büyüyüp küçülen şeyleri yakala. Bölümler ilerledikçe farklar küçülür ve zorlaşır.',
+    heroFacts: ['20 bölüm', 'Her resimde 7 fark', 'İpucu ve kombo', 'Mobilde de oynanır'],
+    description: 'Yan yana duran iki resim ilk bakışta aynı görünür, ama aralarında tam 7 fark var. Çiftlikten su altına, karlı köyden uzaya ve gece şehrine, lunaparktan kutba kadar 20 bölümde rengi değişen, kaybolan, yön değiştiren ya da büyüyüp küçülen şeyleri yakala. Bölümler ilerledikçe farklar küçülür ve zorlaşır.',
     howTo: [
       'Bölüm listesinden açık bir bölüm seç.',
       'İki resmi karşılaştır. Farkı gördüğün yere resimlerden birinde dokun.',

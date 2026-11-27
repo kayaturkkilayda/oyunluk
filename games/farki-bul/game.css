@@ -30,6 +30,7 @@
 .fb-diff { padding: 2px 8px; border-radius: 99px; background: #e4f6ea; color: #23804a; font-size: .8rem; font-weight: 800; }
 .fb-diff.orta { background: #fff3d1; color: #9a6a00; }
 .fb-diff.zor { background: #ffe3dc; color: #b23a22; }
+.fb-diff.uzman { background: #ece3ff; color: #6a3fc0; }
 .fb-stars { letter-spacing: 2px; color: #d9d4e6; font-size: 1rem; }
 .fb-stars b { color: var(--fb-sun); font-weight: 400; }
 .fb-map-foot { margin-top: 22px; display: flex; justify-content: flex-end; }
