@@ -724,6 +724,7 @@
           el.querySelector('.ad-n').textContent = t.left || '✓';
           el.setAttribute('aria-label', `${t.e} ${t.left} kaldı`);
           el.classList.toggle('done', !t.left);
+          if (!t.left) el.parentElement.scrollTo({ left: 0, behavior: 'smooth' });
           el.classList.add('bump'); setTimeout(() => el.classList.remove('bump'), 180);
         });
         if (!t.left) { sfx('typeDone'); toast(`Tüm ${t.e} bulundu!`); if (P.sel === k) selectType(k); } else sfx('found', P.combo);
