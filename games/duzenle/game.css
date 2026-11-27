@@ -1,0 +1,107 @@
+/* Düzenle — pastel, yumuşak; sahne tamamen SVG */
+.dz-root {
+  --dz-ink: #43293f; --dz-soft: #7d6479; --dz-pink: #f27a9b; --dz-pink-d: #d9567c; --dz-lilac: #b9a2ec;
+  --dz-cream: #fffaf7; --dz-gold: #f2b234; --dz-table: #efe3f6;
+  position: absolute; inset: 0; overflow: hidden; color: var(--dz-ink);
+  font-family: "Nunito", system-ui, sans-serif; user-select: none; -webkit-user-select: none;
+  background: var(--dz-table);
+}
+.dz-root * { box-sizing: border-box; }
+.dz-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.dz-view { position: absolute; inset: 0; }
+:where(.dz-root) button { font-family: inherit; cursor: pointer; border: 0; color: inherit; }
+.dz-display { font-family: "Fredoka", "Trebuchet MS", sans-serif; font-weight: 600; }
+
+/* ---------- Bölüm listesi ---------- */
+.dz-map {
+  position: absolute; inset: 0; overflow-y: auto; padding: 22px;
+  background: radial-gradient(circle at 15% 0%, #fde7ef 0, transparent 45%), radial-gradient(circle at 100% 100%, #e3dcfb 0, transparent 50%), #f7eef6;
+}
+.dz-map-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.dz-map-head h2 { margin: 0; font-size: 2rem; color: var(--dz-pink-d); }
+.dz-map-head p { margin: 4px 0 0; color: var(--dz-soft); font-size: .95rem; }
+.dz-total { font-weight: 800; background: #fff; padding: 6px 14px; border-radius: 99px; font-variant-numeric: tabular-nums; white-space: nowrap; box-shadow: 0 2px 0 #ead9e6; }
+.dz-total b { color: var(--dz-gold); font-weight: 400; }
+.dz-levels { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+.dz-level {
+  background: #fff; border-radius: 20px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 3px; text-align: left;
+  box-shadow: 0 5px 0 #ecdbe8, 0 10px 22px rgba(120, 70, 110, .1); transition: transform .15s ease, box-shadow .15s ease; position: relative;
+}
+.dz-level:hover:not([disabled]) { transform: translateY(-4px); box-shadow: 0 9px 0 #ecdbe8, 0 16px 26px rgba(120, 70, 110, .14); }
+.dz-thumb { position: relative; display: block; border-radius: 14px; background: #f6edf3; aspect-ratio: 4 / 3; overflow: hidden; margin-bottom: 6px; }
+.dz-thumb svg { width: 100%; height: 100%; display: block; }
+.dz-level.locked .dz-thumb svg { filter: grayscale(.7) opacity(.55); }
+.dz-lock { position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.8rem; }
+.dz-level-num { position: absolute; top: 16px; left: 16px; background: var(--dz-pink); color: #fff; font-weight: 800; font-size: .8rem; min-width: 26px; height: 26px; border-radius: 99px; display: grid; place-items: center; box-shadow: 0 2px 0 var(--dz-pink-d); }
+.dz-level.locked .dz-level-num { background: #b8a8b5; box-shadow: none; }
+.dz-level-name { font-size: 1.08rem; padding: 0 4px; }
+.dz-level-sub { font-size: .8rem; font-weight: 700; color: var(--dz-soft); padding: 0 4px; min-height: 1.3em; }
+.dz-stars { letter-spacing: 2px; color: #e3d6df; font-size: 1rem; }
+.dz-stars b { color: var(--dz-gold); font-weight: 400; }
+.dz-map-foot { margin-top: 22px; display: flex; justify-content: flex-end; }
+.dz-link { background: none; color: var(--dz-soft) !important; text-decoration: underline; font-size: .85rem; padding: 4px; }
+
+/* ---------- Oyun ekranı ---------- */
+.dz-play { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dz-top {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px; z-index: 3;
+  background: rgba(255, 255, 255, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(160, 110, 150, .15);
+}
+.dz-iconbtn { width: 38px; height: 38px; border-radius: 12px; background: #fff; display: grid; place-items: center; font-size: 1.05rem; flex: none; box-shadow: 0 2px 0 #ead9e6; position: relative; }
+.dz-iconbtn:hover:not([disabled]) { background: #fff3f7; }
+.dz-iconbtn[disabled] { opacity: .45; cursor: default; }
+.dz-iconbtn small { position: absolute; top: -5px; right: -5px; background: var(--dz-pink); color: #fff; font-size: .66rem; font-weight: 800; min-width: 17px; height: 17px; border-radius: 99px; display: grid; place-items: center; }
+.dz-title { font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
+.dz-prog { margin-left: auto; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.dz-bar { width: 110px; height: 10px; border-radius: 99px; background: #f0e1ea; overflow: hidden; display: block; }
+.dz-bar i { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #ffa9c0, var(--dz-pink)); transition: width .35s ease; }
+.dz-time { font-weight: 800; font-size: .9rem; font-variant-numeric: tabular-nums; background: #fff; padding: 6px 10px; border-radius: 10px; white-space: nowrap; box-shadow: 0 2px 0 #ead9e6; }
+@media (max-width: 600px) { .dz-title { display: none; } .dz-top { gap: 6px; padding: 8px; } .dz-bar { width: 70px; } .dz-iconbtn { width: 34px; height: 34px; } }
+@media (max-width: 400px) { .dz-hide-xs { display: none !important; } }
+
+.dz-stage { flex: 1; min-height: 0; position: relative; }
+.dz-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+.dz-item { cursor: grab; }
+.dz-item.lift { cursor: grabbing; }
+.dz-item.done { cursor: default; pointer-events: none; }
+.dz-hit { fill: transparent; }
+.dz-slot.near { animation: dzPulse .7s ease-in-out infinite; }
+.dz-slot.hinted, .dz-item.hinted { animation: dzPulse .55s ease-in-out infinite; }
+@keyframes dzPulse { 50% { opacity: .45; } }
+
+.dz-toast {
+  position: absolute; left: 50%; bottom: 18px; transform: translate(-50%, 10px); opacity: 0; transition: opacity .3s ease, transform .3s ease;
+  background: rgba(67, 41, 63, .88); color: #fff; font-weight: 700; font-size: .92rem; padding: 10px 16px; border-radius: 99px; pointer-events: none; text-align: center; max-width: calc(100% - 32px);
+}
+.dz-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Pencereler ---------- */
+.dz-modal { position: absolute; inset: 0; z-index: 10; display: grid; place-items: center; padding: 16px; background: rgba(67, 41, 63, .32); animation: dzFade .25s ease; }
+.dz-card { background: var(--dz-cream); border-radius: 24px; padding: 22px 22px 18px; width: min(380px, 100%); text-align: center; box-shadow: 0 8px 0 #ecd6e3, 0 24px 50px rgba(67, 41, 63, .3); animation: dzPop .35s cubic-bezier(.2, 1.4, .4, 1); }
+.dz-card h3 { margin: 4px 0 6px; font-size: 1.7rem; color: var(--dz-pink-d); }
+.dz-card p { margin: 0 0 10px; color: var(--dz-soft); }
+.dz-small { font-size: .85rem; }
+.dz-win-stars { display: flex; justify-content: center; gap: 6px; font-size: 2.6rem; line-height: 1; }
+.dz-win-stars span { color: #eadde5; animation: dzStar .5s cubic-bezier(.2, 1.6, .4, 1) both; }
+.dz-win-stars span.on { color: var(--dz-gold); text-shadow: 0 3px 0 #d58f12; }
+.dz-win-facts { display: flex; justify-content: center; gap: 10px; margin: 4px 0 12px; font-weight: 800; }
+.dz-win-facts span { background: #fff; border-radius: 10px; padding: 5px 10px; box-shadow: 0 2px 0 #ecdbe8; }
+.dz-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
+.dz-btn { background: var(--dz-pink); color: #fff !important; font-weight: 800; padding: 10px 18px; border-radius: 14px; box-shadow: 0 4px 0 var(--dz-pink-d); font-size: .98rem; }
+.dz-btn:hover { filter: brightness(1.05); }
+.dz-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--dz-pink-d); }
+.dz-btn.alt { background: #fff; color: var(--dz-ink) !important; box-shadow: 0 4px 0 #ead9e6; }
+@keyframes dzFade { from { opacity: 0; } }
+@keyframes dzPop { from { transform: scale(.8); opacity: 0; } }
+@keyframes dzStar { from { transform: scale(0) rotate(-40deg); } }
+
+/* ---------- Çekmece düğmeleri ---------- */
+.dz-tabs { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; background: rgba(255, 255, 255, .7); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 5px; border-radius: 16px; box-shadow: 0 4px 14px rgba(67, 41, 63, .12); max-width: calc(100% - 20px); }
+.dz-tab { display: flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 12px; background: transparent; font-weight: 800; font-size: .88rem; white-space: nowrap; color: var(--dz-soft) !important; }
+.dz-tab small { font-size: .74rem; background: #f3e6ee; color: var(--dz-ink); border-radius: 99px; padding: 1px 7px; font-variant-numeric: tabular-nums; }
+.dz-tab[aria-selected="true"] { background: #fff; color: var(--dz-ink) !important; box-shadow: 0 2px 0 #ead9e6; }
+.dz-tab.full small { background: #9fdcc8; color: #fff; }
+.dz-tab-ico { font-size: 1rem; }
+@media (max-width: 480px) { .dz-tab-ico { display: none; } .dz-tab { padding: 6px 9px; font-size: .8rem; } }
+.dz-layers { position: absolute; right: 8px; bottom: 8px; background: rgba(67, 41, 63, .78); color: #fff; font-size: .7rem; font-weight: 800; padding: 2px 8px; border-radius: 99px; }
