@@ -1,6 +1,6 @@
 # Oyunluk — oyun sitesi
 
-Tarayıcıda, indirmeden oynanan oyunlar: **Ada Dedektifi** (ada temalı saklı nesne oyunu, 10 bölüm, 380+ eşya) **Farkı Bul** (iki resim, 7 fark, 10 bölüm) ve **Sudoku** (4 zorluk, 48 bulmaca).
+Tarayıcıda, indirmeden oynanan oyunlar: **Ada Dedektifi** (ada temalı saklı nesne oyunu, 20 bölüm, 780+ eşya) **Farkı Bul** (iki resim, 7 fark, 10 bölüm) ve **Sudoku** (4 zorluk, 48 bulmaca).
 
 Sade HTML + CSS + JavaScript. Derleme aracı, framework veya sunucu kodu yok.
 

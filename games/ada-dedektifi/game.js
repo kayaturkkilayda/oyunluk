@@ -98,6 +98,36 @@
       targets: [['🦑', 4], ['🐙', 4], ['🐚', 5], ['🦐', 5], ['🦞', 4], ['🐡', 4], ['🔱', 4], ['🏺', 4], ['💎', 4], ['🗝️', 4]],
       pool: ['🐠', '🐟', '🐢', '🦈', '🐬', '🐋', '🐳', '⚓', '🦪', '🌿', '💧', '🧭', '⭐', '🌟', '🌙', '🔮', '🎣', '🌀', '🍀', '🐊', '📜', '💰'],
     },
+    {
+      id: 'sisliorman', name: 'Sisli Orman', diff: 'Uzman', W: 2800, H: 1867, paint: 'forest', seed: 173, tint: 'rgba(170,190,190,.5)',
+      size: [23, 34], decoys: 560,
+      targets: [['🦊', 4], ['🦔', 4], ['🐌', 5], ['🍁', 5], ['🕯️', 4], ['🧤', 4], ['🎒', 4], ['🐇', 4], ['🦉', 4], ['🔦', 4]],
+      pool: ['🍂', '🌿', '☘️', '🐿️', '🐛', '🐝', '🌼', '🌻', '🥾', '⛺', '🔥', '🌾', '🐾', '🌲', '🥫', '🧭', '🍄', '🦎', '🐸', '🦋', '🐞', '🌰'],
+    },
+    {
+      id: 'safakpazar', name: 'Şafakta Pazar', diff: 'Uzman', W: 2800, H: 1867, paint: 'market', seed: 179, tint: 'rgba(255,185,205,.38)',
+      size: [23, 34], decoys: 580,
+      targets: [['🍓', 5], ['🍇', 4], ['🥑', 4], ['🌽', 4], ['🧄', 4], ['🍯', 4], ['🧀', 4], ['🥚', 5], ['🍆', 4], ['🥕', 4]],
+      pool: ['🍍', '🥭', '🍌', '🌶️', '🍋', '🧺', '🧿', '🪔', '🥥', '🍎', '🍐', '🍒', '🥝', '🍅', '🧅', '🥜', '🧂', '🍞', '🥬', '🍑', '🍈', '🥔', '🍠'],
+    },
+    {
+      id: 'altinsaat', name: 'Altın Saat Kasabası', diff: 'Uzman', W: 2800, H: 1867, paint: 'town', seed: 181, tint: 'rgba(255,195,110,.4)',
+      size: [22, 33], decoys: 600,
+      targets: [['🐕', 4], ['🛵', 4], ['🌷', 5], ['🧳', 4], ['🥖', 4], ['👒', 4], ['📚', 4], ['🖼️', 4], ['🎸', 4], ['🧸', 4]],
+      pool: ['⛵', '🚲', '🐈', '🎈', '☂️', '🧺', '🍦', '📮', '🔔', '🎨', '🚗', '🌻', '🐦', '🕊️', '📦', '🍞', '🧀', '🎒', '🧢', '🕶️', '🪑', '🛒'],
+    },
+    {
+      id: 'lavgecesi', name: 'Kızıl Lav Gecesi', diff: 'Uzman', W: 2800, H: 1867, paint: 'volcano', seed: 191, tint: 'rgba(130,70,110,.45)',
+      size: [22, 33], decoys: 620,
+      targets: [['🦇', 5], ['🌙', 4], ['🔮', 4], ['🦴', 4], ['📜', 4], ['🗝️', 4], ['🐍', 4], ['🦎', 4], ['☄️', 4], ['💰', 4]],
+      pool: ['🔥', '💎', '🦕', '🦖', '🥚', '⛏️', '🧪', '🌡️', '🦂', '🍄', '🌵', '🧭', '⚙️', '🔩', '🧲', '🕯️', '🐀', '⭐', '🪓', '🎒', '🔦'],
+    },
+    {
+      id: 'firtinafener', name: 'Fırtına Feneri', diff: 'Uzman', W: 3000, H: 2000, paint: 'cove', seed: 199, tint: 'rgba(80,90,135,.5)',
+      size: [22, 32], decoys: 680,
+      targets: [['⚓', 4], ['🔭', 4], ['🗺️', 4], ['🕯️', 4], ['⛵', 4], ['🐦', 4], ['🦀', 5], ['🪑', 4], ['⏳', 4], ['🎩', 4], ['🛡️', 4]],
+      pool: ['🗝️', '💎', '📜', '💰', '🦜', '🏺', '🔮', '🐚', '🐙', '🦑', '🐠', '🐟', '🛶', '🐢', '🐬', '🌴', '⚔️', '🏹', '🕊️', '🦢', '📦', '🧭'],
+    },
   ];
   const PAR_PER_ITEM = { Kolay: 12, Orta: 14, Zor: 16, Uzman: 18 };
   const HINT_MAX = 3, HINT_RECHARGE = 45000, COMBO_WINDOW = 5000;
@@ -1060,10 +1090,10 @@
     category: 'sakli-nesne',
     featured: true,
     isNew: true,
-    short: '15 bölüm, 570+ eşya',
+    short: '20 bölüm, 780+ eşya',
     tags: ['saklı nesne', 'ada', 'bulmaca', 'dikkat', 'tek oyunculu', 'mobil'],
-    heroFacts: ['15 ada bölümü', '570+ saklı eşya', 'İpucu ve kombo', 'Mobilde de oynanır'],
-    description: 'Tropik bir adada dedektiflik yap. Kumsaldan mercan resifine, gizli mağaradan şelale vadisine, volkan eteğinden ağaç ev köyüne kadar on beş kalabalık sahnede saklanan eşyaları bul. Bölümleri bitirdikçe yeni yerlerin kilidi açılır.',
+    heroFacts: ['20 ada bölümü', '780+ saklı eşya', 'İpucu ve kombo', 'Mobilde de oynanır'],
+    description: 'Tropik bir adada dedektiflik yap. Kumsaldan mercan resifine, gizli mağaradan şelale vadisine, volkan eteğinden fırtınalı bir deniz fenerine kadar yirmi kalabalık sahnede saklanan eşyaları bul. Bölümleri bitirdikçe yeni yerlerin kilidi açılır.',
     howTo: [
       'Haritadan açık bir bölüm seç.',
       'Alttaki listede aranacak eşyalar ve kaç tane kaldığı yazar.',
