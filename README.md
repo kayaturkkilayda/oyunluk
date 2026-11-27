@@ -1,6 +1,6 @@
 # Oyunluk — oyun sitesi
 
-Tarayıcıda, indirmeden oynanan oyunlar. İlk oyun: **Ada Dedektifi**, ada temalı saklı nesne oyunu (5 bölüm, 190 eşya).
+Tarayıcıda, indirmeden oynanan oyunlar. İlk oyun: **Ada Dedektifi**, ada temalı saklı nesne oyunu (10 bölüm, 380+ eşya).
 
 Sade HTML + CSS + JavaScript. Derleme aracı, framework veya sunucu kodu yok.
 

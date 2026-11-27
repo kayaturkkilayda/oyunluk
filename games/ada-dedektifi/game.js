@@ -38,6 +38,36 @@
       targets: [['🔭', 4], ['🗝️', 5], ['💎', 6], ['📜', 5], ['💰', 4], ['🕯️', 4], ['🦜', 4], ['🏺', 4], ['🔮', 4]],
       pool: ['🗺️', '⚓', '🐚', '🦀', '🐙', '🦑', '🐠', '🐟', '⛵', '🛶', '🐢', '🐬', '🌴', '⚔️', '🛡️', '🏹', '🐦', '🕊️', '🦢', '📦', '🧭', '⏳', '🎩', '🪑'],
     },
+    {
+      id: 'resif', name: 'Mercan Resifi', diff: 'Orta', W: 2200, H: 1467, paint: 'reef', seed: 67,
+      size: [28, 40], decoys: 320,
+      targets: [['🐠', 5], ['🐡', 4], ['🐙', 4], ['🦑', 3], ['🐚', 5], ['🐢', 3], ['🦈', 3], ['🐬', 3], ['⚓', 3]],
+      pool: ['🐟', '🦞', '🦐', '🦪', '🌿', '💧', '🔱', '💎', '🗝️', '🧭', '🐋', '⭐', '🍀', '🎣', '🐊', '🌀', '🏺', '🔮'],
+    },
+    {
+      id: 'magara', name: 'Gizli Mağara', diff: 'Orta', W: 2200, H: 1467, paint: 'cave', seed: 71,
+      size: [28, 40], decoys: 330,
+      targets: [['🕯️', 4], ['💎', 5], ['🦇', 5], ['🗝️', 4], ['🔦', 4], ['💰', 4], ['🕷️', 4], ['⛏️', 3], ['🦴', 4]],
+      pool: ['🔮', '📜', '🏺', '🧭', '🪔', '🕸️', '🐍', '🐀', '⚱️', '🧲', '⚙️', '🔩', '🧪', '🍄', '🐌', '🦂', '🔔', '📿', '⏳', '🎒'],
+    },
+    {
+      id: 'selale', name: 'Şelale Vadisi', diff: 'Orta', W: 2400, H: 1600, paint: 'waterfall', seed: 83,
+      size: [27, 38], decoys: 380,
+      targets: [['🦜', 5], ['🐒', 4], ['🍌', 5], ['🦋', 5], ['🌺', 5], ['🐸', 4], ['🦎', 4], ['🍍', 4], ['🥥', 4]],
+      pool: ['🌴', '🌿', '🍃', '🌸', '🌼', '🐝', '🐞', '🐛', '🐌', '🍄', '🦚', '🦩', '🐍', '🐊', '🍋', '🥭', '🍇', '🌰', '🦔', '🐿️', '💧', '🌈'],
+    },
+    {
+      id: 'kasaba', name: 'Liman Kasabası', diff: 'Zor', W: 2400, H: 1600, paint: 'town', seed: 97,
+      size: [26, 37], decoys: 420,
+      targets: [['⛵', 4], ['🚲', 4], ['🐈', 5], ['🎈', 5], ['☂️', 4], ['🧺', 4], ['🍦', 4], ['📮', 3], ['🔔', 4], ['🎨', 3]],
+      pool: ['🚗', '🛵', '🌷', '🌻', '🐕', '🐦', '🕊️', '🧳', '📦', '🥖', '🍞', '🧀', '🎒', '👒', '🧢', '🕶️', '📚', '🖼️', '🪑', '🛒', '🎸', '🧸'],
+    },
+    {
+      id: 'festival', name: 'Gece Festivali', diff: 'Zor', W: 2600, H: 1733, paint: 'festival', seed: 113,
+      size: [25, 36], decoys: 480,
+      targets: [['🏮', 5], ['🎇', 4], ['🎁', 4], ['🎭', 4], ['🥁', 4], ['🎺', 4], ['🍭', 5], ['🎪', 3], ['🌙', 3], ['🎐', 4]],
+      pool: ['🎈', '🎉', '🎊', '🍬', '🍫', '🍿', '🧁', '🍩', '🍡', '🍢', '🎀', '🎶', '🎵', '🔥', '⭐', '🌟', '🕯️', '🎸', '🎻', '🎤', '🧃', '🍹', '🌺', '🥥', '🍉', '🎏'],
+    },
   ];
   const PAR_PER_ITEM = { Kolay: 12, Orta: 14, Zor: 16 };
   const HINT_MAX = 3, HINT_RECHARGE = 45000, COMBO_WINDOW = 5000;
@@ -271,6 +301,146 @@
       c.restore();
       for (let i = 0; i < 8; i++) crate(c, between(R, 60, W - 60), between(R, 60, H * 0.7), between(R, 44, 60), between(R, -.4, .4));
       for (let i = 0; i < 12; i++) tree(c, between(R, W * 0.35, W - 40), between(R, 20, H * 0.45), between(R, 40, 70), R, ['#2e7d32', '#388e3c', '#43a047']);
+    },
+    reef(c, W, H, R) {
+      const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#2bb5c8'); g.addColorStop(1, '#0b5f86');
+      c.fillStyle = g; c.fillRect(0, 0, W, H);
+      c.fillStyle = 'rgba(255,255,255,.07)';
+      for (let i = 0; i < 9; i++) { const x = between(R, -200, W); c.beginPath(); c.moveTo(x, 0); c.lineTo(x + 120, 0); c.lineTo(x + 420, H); c.lineTo(x + 260, H); c.fill(); }
+      for (let i = 0; i < 18; i++) blob(c, R() * W, between(R, H * 0.3, H), between(R, 80, 180), R, pick(R, ['#e9d29a', '#dcc38a', '#f0dcaa']));
+      speckle(c, W, H, R, 1500, ['rgba(255,255,255,.18)', 'rgba(0,40,60,.15)'], 2);
+      c.lineCap = 'round';
+      for (let i = 0; i < 26; i++) {
+        const x = R() * W, y = R() * H, col = pick(R, ['#ff6b6b', '#ff9f68', '#f78fb3', '#c56cf0', '#ffd166']);
+        c.strokeStyle = col;
+        const br = (x0, y0, a, len, w, d) => { if (d === 0 || len < 8) return; const x1 = x0 + Math.cos(a) * len, y1 = y0 + Math.sin(a) * len; c.lineWidth = w; c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1, y1); c.stroke(); br(x1, y1, a - between(R, .3, .7), len * .7, w * .75, d - 1); br(x1, y1, a + between(R, .3, .7), len * .7, w * .75, d - 1); };
+        br(x, y, between(R, 0, 6.283), between(R, 30, 50), 14, 4);
+      }
+      for (let i = 0; i < 14; i++) {
+        const x = R() * W, y = R() * H, r = between(R, 30, 55);
+        c.fillStyle = pick(R, ['#a3c95a', '#e6a157', '#d98cb3']); c.beginPath(); c.arc(x, y, r, 0, 6.283); c.fill();
+        c.strokeStyle = 'rgba(0,0,0,.18)'; c.lineWidth = 3;
+        for (let k = 0; k < 4; k++) { c.beginPath(); c.arc(x, y, r * (0.25 + k * 0.2), between(R, 0, 3), between(R, 3.5, 6.2)); c.stroke(); }
+      }
+      for (let i = 0; i < 30; i++) {
+        const x = R() * W, y = R() * H, h = between(R, 80, 160);
+        c.strokeStyle = pick(R, ['#2e9e5b', '#48b36b', '#237a45']); c.lineWidth = 9;
+        c.beginPath(); c.moveTo(x, y); for (let t = 0; t <= 1; t += 0.1) c.lineTo(x + Math.sin(t * 9 + i) * 12, y - t * h); c.stroke();
+      }
+      c.save(); c.translate(W * 0.7, H * 0.72); c.rotate(0.5);
+      c.fillStyle = '#4a3523'; c.beginPath(); c.ellipse(0, 0, 230, 80, 0, 0, 6.283); c.fill();
+      c.fillStyle = '#5e4630'; c.beginPath(); c.ellipse(0, 0, 200, 60, 0, 0, 6.283); c.fill();
+      c.strokeStyle = '#3a2817'; c.lineWidth = 7; for (let k = -170; k <= 170; k += 56) { c.beginPath(); c.moveTo(k, -56); c.lineTo(k, 56); c.stroke(); }
+      c.restore();
+      c.strokeStyle = 'rgba(255,255,255,.55)'; c.lineWidth = 2.5;
+      for (let i = 0; i < 90; i++) { c.beginPath(); c.arc(R() * W, R() * H, between(R, 4, 12), 0, 6.283); c.stroke(); }
+    },
+    cave(c, W, H, R) {
+      c.fillStyle = '#7a6656'; c.fillRect(0, 0, W, H);
+      for (let i = 0; i < 40; i++) blob(c, R() * W, R() * H, between(R, 60, 150), R, pick(R, ['#71604f', '#85705f', '#6b5949']));
+      speckle(c, W, H, R, 2600, ['#5e4f42', '#94806e', '#6b5949'], 2.5);
+      for (let i = 0; i < 34; i++) { const edge = R() < .5; const x = edge ? (R() < .5 ? between(R, -40, 140) : between(R, W - 140, W + 40)) : R() * W; const y = edge ? R() * H : (R() < .5 ? between(R, -40, 120) : between(R, H - 120, H + 40)); blob(c, x, y, between(R, 70, 150), R, '#3f342c', '#2e2620'); }
+      c.fillStyle = '#2f7ea3'; blob(c, W * 0.55, H * 0.6, 190, R, '#2f7ea3', '#1f5d7a');
+      c.fillStyle = 'rgba(255,255,255,.18)'; c.beginPath(); c.ellipse(W * 0.53, H * 0.57, 90, 30, -0.3, 0, 6.283); c.fill();
+      for (let i = 0; i < 7; i++) { const x = between(R, 150, W - 150), y = between(R, 150, H - 150); const gr = c.createRadialGradient(x, y, 0, x, y, 220); gr.addColorStop(0, 'rgba(255,200,110,.45)'); gr.addColorStop(1, 'rgba(255,200,110,0)'); c.fillStyle = gr; c.fillRect(x - 220, y - 220, 440, 440); c.fillStyle = '#ffb347'; c.beginPath(); c.arc(x, y, 10, 0, 6.283); c.fill(); }
+      for (let i = 0; i < 12; i++) {
+        const x = R() * W, y = R() * H, col = pick(R, [['#b388ff', '#7c4dff'], ['#64ffda', '#1de9b6'], ['#ff80ab', '#f50057']]);
+        for (let k = 0; k < 5; k++) { c.save(); c.translate(x + between(R, -25, 25), y + between(R, -20, 20)); c.rotate(between(R, -0.8, 0.8)); c.fillStyle = col[k % 2]; c.beginPath(); c.moveTo(0, -34); c.lineTo(10, -8); c.lineTo(8, 14); c.lineTo(-8, 14); c.lineTo(-10, -8); c.closePath(); c.fill(); c.restore(); }
+      }
+      for (let i = 0; i < 22; i++) { const x = R() * W, y = R() * H, r = between(R, 16, 30); [[1, '#5a4a3d'], [0.7, '#8d7966'], [0.4, '#b3a08b']].forEach(([k, col]) => { c.fillStyle = col; c.beginPath(); c.arc(x, y, r * k, 0, 6.283); c.fill(); }); }
+      c.strokeStyle = '#4a3a22'; c.lineWidth = 8; c.beginPath(); c.moveTo(0, H * 0.3); c.lineTo(W, H * 0.42); c.stroke();
+      c.lineWidth = 4; for (let x = 20; x < W; x += 50) { const y = H * 0.3 + x / W * H * 0.12; c.beginPath(); c.moveTo(x, y - 14); c.lineTo(x, y + 14); c.stroke(); }
+    },
+    waterfall(c, W, H, R) {
+      c.fillStyle = '#6cb851'; c.fillRect(0, 0, W, H);
+      for (let i = 0; i < 40; i++) blob(c, R() * W, R() * H, between(R, 60, 140), R, pick(R, ['#5fa947', '#7cc761', '#68b34e']));
+      speckle(c, W, H, R, 2600, ['#58a141', '#8fd174'], 2.5);
+      c.beginPath(); c.moveTo(0, 0); c.lineTo(W, 0);
+      for (let x = W; x >= 0; x -= 20) c.lineTo(x, H * 0.22 + Math.sin(x / 70) * 20 + Math.sin(x / 23) * 8);
+      c.closePath(); c.fillStyle = '#8b9290'; c.fill();
+      for (let i = 0; i < 30; i++) blob(c, R() * W, between(R, 0, H * 0.2), between(R, 30, 70), R, pick(R, ['#7b8280', '#9aa19f', '#6d7472']), '#5d6462');
+      const fx = W * 0.45, fw = 220;
+      const fg = c.createLinearGradient(fx, 0, fx + fw, 0); fg.addColorStop(0, '#bfe9f5'); fg.addColorStop(.5, '#ffffff'); fg.addColorStop(1, '#bfe9f5');
+      c.fillStyle = fg; c.fillRect(fx, 0, fw, H * 0.3);
+      c.strokeStyle = 'rgba(70,160,200,.4)'; c.lineWidth = 4; for (let x = fx + 10; x < fx + fw; x += 22) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x + 4, H * 0.3); c.stroke(); }
+      blob(c, fx + fw / 2, H * 0.36, 260, R, '#3fa0c8', '#2b80a6');
+      c.fillStyle = 'rgba(255,255,255,.6)'; for (let i = 0; i < 40; i++) { c.beginPath(); c.arc(fx + fw / 2 + between(R, -150, 150), H * 0.3 + between(R, -10, 50), between(R, 6, 16), 0, 6.283); c.fill(); }
+      c.lineCap = 'round';
+      const rv = t => [fx + fw / 2 + Math.sin(t * 4) * 260 + t * 300, H * 0.36 + t * H * 0.7];
+      [[110, '#2b80a6'], [86, '#3fa0c8'], [24, 'rgba(255,255,255,.25)']].forEach(([w, col]) => { c.strokeStyle = col; c.lineWidth = w; c.beginPath(); for (let t = 0; t <= 1.001; t += 0.02) { const [x, y] = rv(t); t ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke(); });
+      const [bx, by] = rv(0.55);
+      planks(c, bx - 160, by - 28, 320, 56, false, R, '#a8743f');
+      c.strokeStyle = '#6b4a2a'; c.lineWidth = 4; c.beginPath(); c.moveTo(bx - 160, by - 30); c.lineTo(bx + 160, by - 30); c.moveTo(bx - 160, by + 30); c.lineTo(bx + 160, by + 30); c.stroke();
+      for (let i = 0; i < 40; i++) { const x = R() * W, y = between(R, H * 0.22, H); tree(c, x, y, between(R, 45, 80), R, ['#1b5e20', '#2e7d32', '#388e3c', '#43a047']); }
+      for (let i = 0; i < 8; i++) palm(c, R() * W, between(R, H * 0.3, H), between(R, 70, 100), R);
+      for (let i = 0; i < 160; i++) { c.fillStyle = pick(R, ['#ff6b8b', '#ffd166', '#ffffff', '#c86bfa']); c.beginPath(); c.arc(R() * W, between(R, H * 0.22, H), between(R, 3, 6), 0, 6.283); c.fill(); }
+    },
+    town(c, W, H, R) {
+      c.fillStyle = '#cfc4b4'; c.fillRect(0, 0, W, H);
+      for (let y = 0; y < H; y += 26) for (let x = (y / 26 % 2) * 18; x < W; x += 36) { c.fillStyle = pick(R, ['#c4b8a6', '#d8cebf', '#bdb19f']); c.beginPath(); c.ellipse(x, y, 16, 11, 0, 0, 6.283); c.fill(); }
+      const harbor = H * 0.8;
+      const hg = c.createLinearGradient(0, harbor, 0, H); hg.addColorStop(0, '#2aa3b8'); hg.addColorStop(1, '#0e6f86');
+      c.fillStyle = hg; c.fillRect(0, harbor, W, H - harbor);
+      c.fillStyle = '#8a7f72'; c.fillRect(0, harbor - 14, W, 18);
+      waves(c, W, harbor + 30, H, R, 'rgba(255,255,255,.3)', 50);
+      for (let i = 0; i < 5; i++) {
+        const x = between(R, 120, W - 120), y = between(R, harbor + 70, H - 60), col = pick(R, ['#ff6b4a', '#f4f1ea', '#2f9ad6', '#ffc845']);
+        c.save(); c.translate(x, y); c.rotate(between(R, -.3, .3));
+        c.fillStyle = col; c.beginPath(); c.ellipse(0, 0, 110, 36, 0, 0, 6.283); c.fill();
+        c.fillStyle = '#8a5a26'; c.beginPath(); c.ellipse(0, 0, 92, 24, 0, 0, 6.283); c.fill();
+        c.restore();
+      }
+      const cols = 6, rows = 3, cw = W / cols, rh = harbor / rows;
+      for (let r = 0; r < rows; r++) for (let k = 0; k < cols; k++) {
+        if (r === 1 && (k === 2 || k === 3)) continue;
+        const x = k * cw + cw * 0.12, y = r * rh + rh * 0.14, w = cw * 0.76, h = rh * 0.62;
+        c.fillStyle = 'rgba(40,30,20,.25)'; c.fillRect(x + 12, y + 14, w, h);
+        const roof = pick(R, [['#c8553d', '#a8432f'], ['#d9734e', '#b85c3a'], ['#4f7cac', '#3d6489'], ['#7a9e7e', '#5f8263']]);
+        c.fillStyle = roof[0]; c.fillRect(x, y, w, h / 2);
+        c.fillStyle = roof[1]; c.fillRect(x, y + h / 2, w, h / 2);
+        c.strokeStyle = 'rgba(0,0,0,.15)'; c.lineWidth = 2;
+        for (let yy = y + 12; yy < y + h; yy += 14) { c.beginPath(); c.moveTo(x, yy); c.lineTo(x + w, yy); c.stroke(); }
+        c.strokeStyle = 'rgba(255,255,255,.35)'; c.lineWidth = 4; c.beginPath(); c.moveTo(x, y + h / 2); c.lineTo(x + w, y + h / 2); c.stroke();
+        if (R() < .6) { c.fillStyle = '#8a7f72'; c.fillRect(x + w * between(R, .15, .75), y + h * .15, 22, 22); }
+      }
+      const px = W / 2, py = rh * 1.5;
+      c.fillStyle = '#e8dfd0'; c.beginPath(); c.arc(px, py, 120, 0, 6.283); c.fill();
+      c.fillStyle = '#9a9184'; c.beginPath(); c.arc(px, py, 80, 0, 6.283); c.fill();
+      c.fillStyle = '#4fc4cf'; c.beginPath(); c.arc(px, py, 64, 0, 6.283); c.fill();
+      c.fillStyle = '#e8dfd0'; c.beginPath(); c.arc(px, py, 18, 0, 6.283); c.fill();
+      for (let i = 0; i < 8; i++) { const x = between(R, 60, W - 200), y = between(R, 40, harbor - 80); const sw = 14; for (let s = 0; s < 9; s++) { c.fillStyle = s % 2 ? '#fff' : pick(R, ['#ff6b4a', '#0f8b8d', '#ffc845']); c.fillRect(x + s * sw, y, sw, 30); } }
+      for (let i = 0; i < 24; i++) tree(c, R() * W, between(R, 0, harbor - 30), between(R, 22, 36), R, ['#2e7d32', '#43a047', '#66bb6a']);
+    },
+    festival(c, W, H, R) {
+      c.fillStyle = '#4b4376'; c.fillRect(0, 0, W, H);
+      speckle(c, W, H, R, 2600, ['#57508a', '#3f3866', '#625a96'], 2.5);
+      const sea = H * 0.2;
+      c.fillStyle = '#1b2556'; c.fillRect(0, 0, W, sea);
+      c.strokeStyle = 'rgba(255,255,255,.7)'; c.lineWidth = 6; c.beginPath(); c.moveTo(0, sea); for (let x = 0; x <= W; x += 20) c.lineTo(x, sea + Math.sin(x / 60) * 8); c.stroke();
+      c.fillStyle = 'rgba(255,240,180,.35)'; for (let i = 0; i < 18; i++) c.fillRect(W * 0.7 - i * 3 + between(R, -30, 30), 20 + i * (sea - 30) / 18, 60 + i * 4, 5);
+      waves(c, W, 10, sea - 20, R, 'rgba(160,180,255,.25)', 40);
+      const glow = (x, y, r, col) => { const gr = c.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, col); gr.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = gr; c.fillRect(x - r, y - r, r * 2, r * 2); };
+      const fx = W * 0.5, fy = H * 0.55;
+      glow(fx, fy, 380, 'rgba(255,170,80,.55)');
+      for (let i = 0; i < 12; i++) { c.fillStyle = '#6b6b7a'; c.beginPath(); c.arc(fx + Math.cos(i / 12 * 6.283) * 56, fy + Math.sin(i / 12 * 6.283) * 56, 14, 0, 6.283); c.fill(); }
+      c.fillStyle = '#ff7b39'; c.beginPath(); c.arc(fx, fy, 38, 0, 6.283); c.fill(); c.fillStyle = '#ffd166'; c.beginPath(); c.arc(fx, fy, 20, 0, 6.283); c.fill();
+      c.fillStyle = '#5a3d2b'; c.fillRect(W * 0.08, H * 0.3, 360, 220); c.fillStyle = '#7a5640'; c.fillRect(W * 0.08 + 12, H * 0.3 + 12, 336, 196);
+      glow(W * 0.08 + 180, H * 0.3 + 110, 260, 'rgba(200,120,255,.35)');
+      for (let i = 0; i < 6; i++) {
+        const x = between(R, 100, W - 300), y = between(R, sea + 80, H - 160), w = 200;
+        c.fillStyle = '#5b4a3a'; c.fillRect(x, y, w, 110);
+        for (let s = 0; s < 10; s++) { c.fillStyle = s % 2 ? '#f0e6ff' : pick(R, ['#ff5d8f', '#4cc9f0', '#ffd166']); c.fillRect(x + s * 20, y - 16, 20, 36); }
+        glow(x + w / 2, y + 50, 160, 'rgba(255,220,120,.3)');
+      }
+      for (let n = 0; n < 6; n++) {
+        const y0 = between(R, sea + 40, H - 40), y1 = between(R, sea + 40, H - 40), sag = between(R, 60, 140);
+        c.strokeStyle = 'rgba(20,15,40,.7)'; c.lineWidth = 2; c.beginPath(); c.moveTo(0, y0); c.quadraticCurveTo(W / 2, (y0 + y1) / 2 + sag, W, y1); c.stroke();
+        for (let t = 0.02; t < 1; t += 0.03) {
+          const x = W * t, y = (1 - t) * (1 - t) * y0 + 2 * (1 - t) * t * ((y0 + y1) / 2 + sag) + t * t * y1, col = pick(R, ['255,209,102', '255,93,143', '76,201,240', '144,238,144']);
+          glow(x, y + 6, 26, `rgba(${col},.6)`); c.fillStyle = `rgb(${col})`; c.beginPath(); c.arc(x, y + 6, 6, 0, 6.283); c.fill();
+        }
+      }
+      for (let i = 0; i < 400; i++) { c.fillStyle = pick(R, ['#ff5d8f', '#ffd166', '#4cc9f0', '#90ee90', '#ffffff']); c.fillRect(R() * W, between(R, sea, H), 5, 3); }
     },
   };
 
@@ -802,10 +972,10 @@
     category: 'sakli-nesne',
     featured: true,
     isNew: true,
-    short: '5 bölüm, 190+ eşya',
+    short: '10 bölüm, 380+ eşya',
     tags: ['saklı nesne', 'ada', 'bulmaca', 'dikkat', 'tek oyunculu', 'mobil'],
-    heroFacts: ['5 ada bölümü', '190+ saklı eşya', 'İpucu ve kombo', 'Mobilde de oynanır'],
-    description: 'Tropik bir adada dedektiflik yap. Kumsaldan balıkçı iskelesine, pazardan orman kampına ve deniz fenerine kadar kalabalık sahnelerde saklanan eşyaları bul. Bölümleri bitirdikçe yeni yerlerin kilidi açılır.',
+    heroFacts: ['10 ada bölümü', '380+ saklı eşya', 'İpucu ve kombo', 'Mobilde de oynanır'],
+    description: 'Tropik bir adada dedektiflik yap. Kumsaldan mercan resifine, gizli mağaradan şelale vadisine ve gece festivaline kadar on kalabalık sahnede saklanan eşyaları bul. Bölümleri bitirdikçe yeni yerlerin kilidi açılır.',
     howTo: [
       'Haritadan açık bir bölüm seç.',
       'Alttaki listede aranacak eşyalar ve kaç tane kaldığı yazar.',
