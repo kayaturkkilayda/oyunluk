@@ -1,0 +1,127 @@
+/* Sudoku — defter kâğıdı tahtası, lagün rengi arka plan (tek tema) */
+.sd-root {
+  --sd-deep: #0b3b40; --sd-sea: #0f8b8d; --sd-paper: #fffaf0; --sd-paper-2: #f3ead7;
+  --sd-ink: #1d2b3a; --sd-blue: #2357c6; --sd-line: #c9bda4; --sd-thick: #24343f;
+  --sd-peer: #e6edf2; --sd-same: #c4dcff; --sd-sel: #ffd979; --sd-bad: #d6453d; --sd-ok: #2e9e5b;
+  --sd-sun: #ffc845; --sd-coral: #ff6b4a; --sd-muted: #6d7a80;
+  --sd-size: 360px;
+  position: absolute; inset: 0; overflow: hidden; color: var(--sd-ink);
+  font-family: "Nunito", system-ui, sans-serif; user-select: none; -webkit-user-select: none;
+  background: radial-gradient(circle at 20% 0%, #17a3a5 0, var(--sd-sea) 30%, var(--sd-deep) 100%);
+}
+.sd-root * { box-sizing: border-box; }
+:where(.sd-root) button { font-family: inherit; cursor: pointer; border: 0; color: inherit; }
+.sd-display { font-family: "Fredoka", "Trebuchet MS", sans-serif; font-weight: 600; }
+
+/* ---------- Bölüm listesi ---------- */
+.sd-map { position: absolute; inset: 0; overflow-y: auto; padding: 22px; color: #fff; }
+.sd-map-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.sd-map-head h2 { margin: 0; font-size: 1.9rem; }
+.sd-map-head p { margin: 4px 0 0; opacity: .88; font-size: .95rem; }
+.sd-total { font-weight: 800; background: rgba(255,255,255,.14); padding: 6px 12px; border-radius: 99px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sd-total b { color: var(--sd-sun); font-weight: 400; }
+.sd-resume { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.12); border-radius: 16px; padding: 10px 12px 10px 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.sd-resume span { flex: 1; min-width: 160px; font-weight: 700; }
+.sd-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.sd-tab { padding: 8px 14px; border-radius: 99px; background: rgba(255,255,255,.14); color: #fff !important; font-weight: 800; font-size: .92rem; display: flex; gap: 8px; align-items: center; }
+.sd-tab small { font-weight: 700; opacity: .8; font-variant-numeric: tabular-nums; }
+.sd-tab[aria-pressed="true"] { background: #fff; color: var(--sd-deep) !important; }
+.sd-diff-info { margin: -4px 0 14px; font-size: .9rem; opacity: .88; }
+.sd-levels { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px; }
+.sd-level { background: var(--sd-paper); color: var(--sd-ink) !important; border-radius: 16px; padding: 12px 10px 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 5px 0 rgba(0,0,0,.25); transition: transform .12s ease; position: relative; }
+.sd-level:hover:not([disabled]) { transform: translateY(-3px); }
+.sd-level[disabled] { cursor: not-allowed; background: #b9cfcf; color: #5d7474 !important; box-shadow: 0 5px 0 rgba(0,0,0,.18); }
+.sd-level-num { font-size: 1.7rem; line-height: 1.1; }
+.sd-level-sub { font-size: .75rem; font-weight: 800; color: var(--sd-muted); font-variant-numeric: tabular-nums; min-height: 1.1em; }
+.sd-level.cur::after { content: "Devam"; position: absolute; top: -8px; right: -6px; background: var(--sd-coral); color: #fff; font-size: .68rem; font-weight: 800; padding: 2px 7px; border-radius: 99px; }
+.sd-stars { letter-spacing: 2px; color: #d6cdb8; font-size: 1rem; }
+.sd-stars b { color: #f2a900; font-weight: 400; }
+.sd-map-foot { margin-top: 22px; display: flex; justify-content: flex-end; }
+.sd-link { background: none; color: rgba(255,255,255,.78) !important; text-decoration: underline; font-size: .85rem; padding: 4px; }
+
+/* ---------- Oyun ekranı ---------- */
+.sd-play { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.sd-top { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: rgba(5,30,33,.55); color: #fff; z-index: 3; }
+.sd-iconbtn { width: 38px; height: 38px; border-radius: 12px; background: rgba(255,255,255,.14); color: #fff !important; display: grid; place-items: center; font-size: 1.05rem; flex: none; }
+.sd-iconbtn:hover { background: rgba(255,255,255,.24); }
+.sd-title { font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.sd-stats { margin-left: auto; display: flex; gap: 8px; align-items: center; font-weight: 800; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.sd-stat { background: rgba(255,255,255,.14); padding: 6px 10px; border-radius: 10px; display: flex; gap: 6px; align-items: center; white-space: nowrap; }
+.sd-stat.bad { background: var(--sd-bad); }
+.sd-hearts { letter-spacing: 1px; }
+@media (max-width: 560px) { .sd-title { display: none; } .sd-top { gap: 6px; padding: 8px; } .sd-stats { gap: 6px; } .sd-stat { padding: 6px 8px; } .sd-iconbtn { width: 34px; height: 34px; } }
+@media (max-width: 380px) { .sd-hide-xs { display: none !important; } }
+
+.sd-main { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 10px; position: relative; }
+.sd-main.wide { flex-direction: row; gap: 26px; }
+
+/* Tahta: 3×3 kutu, her kutuda 3×3 hücre */
+.sd-board { width: var(--sd-size); height: var(--sd-size); flex: none; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 3px; padding: 3px; background: var(--sd-thick); border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,.3); position: relative; }
+.sd-box { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 1px; background: var(--sd-line); overflow: hidden; }
+.sd-box:nth-child(1) { border-top-left-radius: 9px; } .sd-box:nth-child(3) { border-top-right-radius: 9px; }
+.sd-box:nth-child(7) { border-bottom-left-radius: 9px; } .sd-box:nth-child(9) { border-bottom-right-radius: 9px; }
+.sd-cell { background: var(--sd-paper); padding: 0; position: relative; display: grid; place-items: center; font-family: "Fredoka", "Trebuchet MS", sans-serif; font-weight: 500; font-size: calc(var(--sd-size) * .066); line-height: 1; color: var(--sd-blue) !important; touch-action: manipulation; transition: background-color .12s ease; min-width: 0; min-height: 0; }
+.sd-cell.given { color: var(--sd-ink) !important; font-weight: 600; }
+.sd-cell.peer { background: var(--sd-peer); }
+.sd-cell.same { background: var(--sd-same); }
+.sd-cell.sel { background: var(--sd-sel); }
+.sd-cell.err { color: var(--sd-bad) !important; }
+.sd-cell.err::after { content: ""; position: absolute; inset: 3px; border: 2px solid var(--sd-bad); border-radius: 6px; opacity: .55; }
+.sd-cell.clash { background: #ffd9d3; }
+.sd-cell.sel.clash { background: #ffc0b4; }
+.sd-cell.hinted { color: #7a4fd0 !important; }
+.sd-cell.pop { animation: sd-pop .35s ease; }
+.sd-cell.wave { animation: sd-wave .6s ease both; }
+@keyframes sd-pop { 0% { transform: scale(.6); } 60% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes sd-wave { 0% { background: var(--sd-paper); } 40% { background: #bfeccf; } 100% { background: var(--sd-paper); } }
+.sd-notes { position: absolute; inset: 1px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); font-family: "Nunito", system-ui, sans-serif; font-weight: 800; font-size: calc(var(--sd-size) * .024); color: #5a6b76; }
+.sd-notes span { display: grid; place-items: center; border-radius: 3px; }
+.sd-notes span.hl { background: var(--sd-blue); color: #fff; }
+
+/* Rakam ve araç düğmeleri */
+.sd-pad { display: flex; flex-direction: column; gap: 10px; width: var(--sd-size); flex: none; }
+.sd-main.wide .sd-pad { width: min(260px, 34%); }
+.sd-tools { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.sd-tool { background: rgba(255,255,255,.16); color: #fff !important; border-radius: 14px; padding: 7px 4px 6px; display: flex; flex-direction: column; align-items: center; gap: 1px; font-size: .74rem; font-weight: 800; position: relative; }
+.sd-tool span { font-size: 1.25rem; line-height: 1.2; }
+.sd-tool:hover:not([disabled]) { background: rgba(255,255,255,.26); }
+.sd-tool[disabled] { opacity: .45; cursor: default; }
+.sd-tool[aria-pressed="true"] { background: var(--sd-sun); color: #3a2a00 !important; }
+.sd-tool .sd-badge { position: absolute; top: -6px; right: -4px; min-width: 20px; height: 20px; border-radius: 10px; background: var(--sd-coral); color: #fff; font-size: .72rem; display: grid; place-items: center; padding: 0 5px; border: 2px solid var(--sd-deep); }
+.sd-tool .sd-onoff { position: absolute; top: -6px; right: -4px; font-size: .62rem; padding: 1px 5px; border-radius: 99px; background: rgba(0,0,0,.35); }
+.sd-tool[aria-pressed="true"] .sd-onoff { background: var(--sd-ok); color: #fff; }
+.sd-nums { display: grid; grid-template-columns: repeat(9, 1fr); gap: 6px; }
+.sd-main.wide .sd-nums { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.sd-num { background: var(--sd-paper); color: var(--sd-blue) !important; border-radius: 12px; aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: "Fredoka", "Trebuchet MS", sans-serif; font-weight: 600; font-size: clamp(1.1rem, calc(var(--sd-size) * .07), 2rem); line-height: 1; box-shadow: 0 3px 0 rgba(0,0,0,.25); transition: transform .08s ease; min-width: 0; }
+.sd-main.wide .sd-num { aspect-ratio: 1; font-size: 1.9rem; }
+.sd-num small { font-family: "Nunito", system-ui, sans-serif; font-size: .62rem; font-weight: 800; color: var(--sd-muted); margin-top: 3px; }
+.sd-num:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.25); }
+.sd-num.notes { color: #5a6b76 !important; }
+.sd-num.done { opacity: .35; }
+
+.sd-toast { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background: rgba(5,30,33,.92); color: #fff; padding: 8px 16px; border-radius: 99px; font-weight: 800; font-size: .92rem; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .2s ease; white-space: nowrap; }
+.sd-toast.show { opacity: 1; }
+
+/* Duraklatma örtüsü tahtayı gizler */
+.sd-paused .sd-board .sd-box { filter: blur(9px); }
+.sd-paused .sd-pad { opacity: .3; pointer-events: none; }
+
+/* Pencereler */
+.sd-modal { position: absolute; inset: 0; background: rgba(4,26,29,.62); display: grid; place-items: center; z-index: 6; padding: 16px; }
+.sd-card { background: #fff; border-radius: 22px; padding: 24px; width: min(390px, 100%); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 10px 0 rgba(0,0,0,.25); max-height: 100%; overflow-y: auto; color: var(--sd-ink); }
+.sd-card h3 { margin: 0; font-size: 1.6rem; color: var(--sd-deep); }
+.sd-card p { margin: 0; color: var(--sd-muted); font-size: .95rem; }
+.sd-bigstars { font-size: 2.6rem; letter-spacing: 6px; color: #e6e0d2; }
+.sd-bigstars b { color: #f2a900; font-weight: 400; display: inline-block; animation: sd-starpop .5s ease both; }
+.sd-bigstars b:nth-child(2) { animation-delay: .15s; } .sd-bigstars b:nth-child(3) { animation-delay: .3s; }
+@keyframes sd-starpop { from { transform: scale(0); } 70% { transform: scale(1.3); } to { transform: scale(1); } }
+.sd-goals { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; flex-direction: column; gap: 4px; text-align: left; font-size: .88rem; font-weight: 700; }
+.sd-goals li { display: flex; gap: 8px; align-items: center; padding: 5px 10px; border-radius: 10px; background: #f4f1ea; color: var(--sd-muted); }
+.sd-goals li.ok { background: #e4f6ea; color: #23804a; }
+.sd-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.sd-results div { background: #f4f1ea; border-radius: 12px; padding: 8px 4px; display: flex; flex-direction: column; font-size: .76rem; color: var(--sd-muted); font-weight: 700; }
+.sd-results b { font-size: 1.12rem; color: var(--sd-ink); font-variant-numeric: tabular-nums; }
+.sd-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.sd-btn { padding: 11px 18px; border-radius: 99px; font-weight: 800; background: var(--sd-coral); color: #fff !important; box-shadow: 0 3px 0 rgba(0,0,0,.18); }
+.sd-btn.alt { background: #eeeae0; color: var(--sd-ink) !important; }
+.sd-best { font-size: .82rem !important; font-weight: 800; color: var(--sd-sea) !important; }
