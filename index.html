@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oyunluk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Oyunluk: tarayıcıda ücretsiz oynanan oyunlar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;700;800&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="games/ada-dedektifi/game.css">
+
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#ana-sayfa" aria-label="Oyunluk ana sayfa"><span class="logo-mark" aria-hidden="true">◆</span><span>Oyun<b>luk</b></span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="#ana-sayfa" data-nav="home">Ana sayfa</a>
+      <a href="#tum-oyunlar" data-nav="all">Tüm oyunlar</a>
+      <a href="#kategori-sakli-nesne" data-nav="cat">Saklı nesne</a>
+    </nav>
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="search" type="search" placeholder="Oyun ara" aria-label="Oyun ara" autocomplete="off">
+    </label>
+  </div>
+</header>
+
+<main class="wrap" id="app" tabindex="-1"></main>
+
+<footer>
+  <div class="wrap">
+    <span>Oyunluk · Tarayıcıda, indirmeden oyna</span>
+    <span>İlerlemen bu cihazda saklanır</span>
+  </div>
+</footer>
+
+<script src="js/portal.js"></script>
+<script src="games/ada-dedektifi/game.js"></script>
+<script src="games/yakinda.js"></script>
+<script>Portal.init();</script>
+</body>
+</html>
