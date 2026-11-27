@@ -849,6 +849,191 @@
     },
   });
 
+  Object.assign(ITEMS, {
+    // --- yatak odası / masa / mutfak dolabı (önden)
+    mug: {
+      w: 74, h: 64,
+      draw: v => `
+        ${RING(24, 0, 13, 15, 6, 8, v.color, EDGE)}
+        ${R(-28, -30, 52, 60, 12, v.color, EDGE)}
+        ${E(-2, -27, 24, 5, shade(v.color, -0.25))}
+        ${P('M-2 12 C-10 6 -13 2 -13 -1 A6 6 0 0 1 -2 -3 A6 6 0 0 1 9 -1 C9 2 6 6 -2 12 Z', '#fff', 'fill-opacity=".85"')}
+        ${R(-28, -30, 52, 60, 12, CYL)}`,
+    },
+    mugTop: {
+      w: 84, h: 66,
+      draw: v => `
+        ${R(18, -9, 22, 18, 8, v.color, EDGE)}
+        ${C(-8, 0, 32, v.color, EDGE)}${C(-8, 0, 25, '#8a5a3c')}${E(-14, -8, 9, 5, '#fff', 'fill-opacity=".35"')}
+        ${C(-8, 0, 32, DOME)}`,
+    },
+    phone: {
+      w: 58, h: 110,
+      draw: v => `
+        ${R(-28, -54, 56, 108, 12, v.color, EDGE)}
+        ${R(-23, -46, 46, 88, 6, '#2e2a40')}
+        ${P('M-23 -46 H6 L-23 0 Z', '#fff', 'fill-opacity=".12"')}
+        ${R(-8, -51, 16, 3, 1.5, '#2e2a40')}${R(-10, 46, 20, 4, 2, shade(v.color, -0.2))}`,
+    },
+    headphones: {
+      w: 124, h: 104,
+      draw: v => `
+        ${L('M-46 22 C-50 -44 50 -44 46 22', v.color, 11)}
+        ${L('M-44 16 C-46 -36 46 -36 44 16', '#fff', 2.5, 'stroke-opacity=".45"')}
+        ${E(-46, 28, 15, 22, v.color, EDGE)}${E(46, 28, 15, 22, v.color, EDGE)}
+        ${E(-44, 28, 9, 15, v.pad)}${E(44, 28, 9, 15, v.pad)}`,
+    },
+    plant: {
+      w: 74, h: 106,
+      draw: v => `
+        ${P('M0 10 C-6 -10 -26 -16 -32 -38 C-12 -36 -4 -20 0 4 Z', '#6cc08a', EDGE)}
+        ${P('M0 10 C6 -16 22 -26 30 -48 C10 -44 2 -24 0 4 Z', '#7fd19a', EDGE)}
+        ${P('M0 8 C-2 -20 0 -40 4 -52 C10 -34 6 -14 2 8 Z', '#5cb87c', EDGE)}
+        ${P('M-24 12 H24 L18 52 Q17 53 14 53 H-14 Q-17 53 -18 52 Z', v.pot, EDGE)}
+        ${R(-27, 6, 54, 12, 5, shade(v.pot, -0.12), EDGE)}${R(-27, 6, 54, 5, 2.5, '#fff', 'fill-opacity=".3"')}`,
+    },
+    frame: {
+      w: 72, h: 88,
+      draw: v => `
+        ${R(-34, -42, 68, 84, 6, v.color, EDGE)}
+        ${R(-26, -34, 52, 68, 3, '#cdebfa')}
+        ${P('M-26 34 V14 L-10 -2 L4 12 L12 4 L26 18 V34 Z', '#8fd6a6')}${C(12, -18, 6, '#ffe08a')}
+        ${R(-34, -42, 68, 84, 6, TOP)}`,
+    },
+    slippers: {
+      w: 110, h: 46,
+      draw: v => {
+        const one = dx => `<g transform="translate(${dx} 0)">${P('M-26 16 C-30 0 -20 -14 0 -14 C20 -14 30 0 26 16 Z', v.color, EDGE)}${E(0, -8, 18, 9, '#fff', 'fill-opacity=".85"')}${C(0, -12, 6, v.pom)}${R(-28, 13, 56, 8, 4, shade(v.color, -0.15))}</g>`;
+        return one(-26) + one(26);
+      },
+    },
+    // --- piknik sepeti (üstten)
+    sandwich: {
+      w: 96, h: 90,
+      draw: () => `
+        ${P('M-44 38 L0 -42 L44 38 Z', '#e8b06a', EDGE + ' stroke-linejoin="round"')}
+        ${P('M-34 32 L0 -30 L34 32 Z', '#fbe7c3')}
+        ${L('M-36 34 L0 -32 L36 34', '#7cc46a', 3, 'stroke-dasharray="6 3"')}
+        ${C(-8, 14, 6, '#f2606e', 'fill-opacity=".8"')}${C(10, 20, 5, '#ffd65c', 'fill-opacity=".8"')}`,
+    },
+    cupcake: {
+      w: 62, h: 70,
+      draw: v => `
+        ${P('M-22 6 H22 L16 34 H-16 Z', v.cup, EDGE)}
+        ${L('M-12 8 L-9 32 M0 8 V32 M12 8 L9 32', shade(v.cup, -0.2), 2)}
+        ${P('M-27 8 C-32 -6 -18 -14 -12 -14 C-14 -26 0 -32 8 -24 C20 -24 24 -12 20 -6 C30 -4 30 8 26 10 Z', v.frost, EDGE)}
+        ${C(4, -30, 6, '#ef4a5a', EDGE)}${C(2, -32, 2, '#fff', 'fill-opacity=".7"')}
+        ${[[-14, -2], [6, -10], [16, 2], [-4, 2]].map(([x, y], i) => R(x, y, 6, 2.5, 1.2, ['#7fc8ee', '#ffd65c', '#8fd6a6', '#c3a6ee'][i])).join('')}`,
+    },
+    strawberry: {
+      w: 42, h: 48,
+      draw: () => `
+        ${P('M0 22 C-14 14 -20 0 -18 -8 C-16 -16 -6 -16 0 -14 C6 -16 16 -16 18 -8 C20 0 14 14 0 22 Z', '#f2556a', EDGE)}
+        ${P('M-12 -14 L-4 -12 L0 -22 L4 -12 L12 -14 L6 -8 L0 -10 L-6 -8 Z', '#6cc06a')}
+        ${[[-8, -2], [4, -4], [-2, 6], [8, 4], [-6, 10], [2, 14]].map(([x, y]) => E(x, y, 1.2, 2, '#ffe9a6')).join('')}
+        ${E(-6, -4, 4, 6, '#fff', 'fill-opacity=".3"')}`,
+    },
+    grapes: {
+      w: 64, h: 82,
+      draw: () => `
+        ${L('M0 -30 C2 -36 6 -38 10 -40', '#8a5a3c', 3)}${P('M4 -32 C10 -42 24 -40 26 -32 C18 -28 10 -28 4 -32 Z', '#7cc46a')}
+        ${[[-14, -18], [0, -20], [14, -18], [-20, -4], [-6, -6], [8, -6], [20, -4], [-12, 8], [2, 8], [14, 8], [-6, 21], [8, 21], [1, 33]].map(([x, y]) => `${C(x, y, 8.5, '#a77fd6', EDGE)}${C(x - 2.5, y - 2.5, 2.4, '#fff', 'fill-opacity=".55"')}`).join('')}`,
+    },
+    thermos: {
+      w: 48, h: 142,
+      draw: v => `
+        ${R(-16, -71, 32, 24, 6, shade(v.color, -0.2), EDGE)}
+        ${R(-20, -50, 40, 120, 14, v.color, EDGE)}
+        ${R(-20, -10, 40, 22, 0, '#fffaf5', 'fill-opacity=".85"')}${C(0, 1, 6, v.color)}
+        ${R(-20, -50, 40, 120, 14, CYL)}`,
+    },
+    // --- dikiş kutusu
+    spool: {
+      w: 46, h: 62,
+      draw: v => `
+        ${R(-22, -30, 44, 9, 4, '#e8c393', EDGE)}${R(-22, 21, 44, 9, 4, '#e8c393', EDGE)}
+        ${R(-17, -21, 34, 42, 3, v.color)}
+        ${Array.from({ length: 6 }, (_, i) => L(`M-17 ${-16 + i * 7} H17`, shade(v.color, -0.15), 1.4)).join('')}
+        ${R(-17, -21, 34, 42, 3, CYL)}`,
+    },
+    button: {
+      round: true, w: 38, h: 38,
+      draw: v => `${C(0, 0, 18, v.color, EDGE)}${C(0, 0, 13, shade(v.color, -0.1))}${[[-4, -4], [4, -4], [-4, 4], [4, 4]].map(([x, y]) => C(x, y, 2.2, shade(v.color, -0.4))).join('')}${C(0, 0, 18, GLOSS)}`,
+    },
+    pincushion: {
+      round: true, w: 74, h: 66,
+      draw: () => `
+        ${E(0, 4, 34, 28, '#f2606e', EDGE)}
+        ${L('M0 -24 V32 M-22 -16 C-30 4 -24 22 -16 28 M22 -16 C30 4 24 22 16 28', '#d9465a', 2)}
+        ${P('M-10 -24 L0 -18 L10 -24 L4 -16 L0 -30 L-4 -16 Z', '#6cc06a')}
+        ${[[-14, -6, '#7fc8ee'], [12, -2, '#ffd65c'], [-4, 12, '#c3a6ee'], [18, 14, '#8fd6a6']].map(([x, y, c]) => `${L(`M${x} ${y} l-8 -12`, '#b2bec9', 1.6)}${C(x - 8, y - 12, 3.5, c)}`).join('')}
+        ${E(0, 4, 34, 28, GLOSS)}`,
+    },
+    tape: {
+      round: true, w: 72, h: 72,
+      draw: () => `
+        ${C(0, 0, 34, '#ffd65c', EDGE)}${C(0, 0, 24, '#ffe797')}
+        ${Array.from({ length: 24 }, (_, i) => `<rect x="-0.8" y="-33" width="1.6" height="${i % 2 ? 4 : 7}" fill="#8a6a2c" transform="rotate(${i * 15})"/>`).join('')}
+        ${C(0, 0, 8, '#f2a93a', EDGE)}${C(0, 0, 34, GLOSS)}`,
+    },
+    thimble: {
+      w: 36, h: 40,
+      draw: () => `
+        ${P('M-15 18 V-4 C-15 -14 -8 -19 0 -19 C8 -19 15 -14 15 -4 V18 Z', SILVER, EDGE)}
+        ${R(-17, 14, 34, 6, 3, SILVERV, EDGE)}
+        ${[[-7, -8], [0, -12], [7, -8], [-8, 1], [0, -2], [8, 1], [-8, 9], [0, 7], [8, 9]].map(([x, y]) => C(x, y, 1.4, '#7a8794')).join('')}`,
+    },
+    yarn: {
+      round: true, w: 68, h: 68,
+      draw: v => `
+        ${C(0, 0, 32, v.color, EDGE)}
+        ${L('M-26 -16 C-6 -24 18 -12 28 6 M-30 2 C-10 -8 14 4 22 22 M-22 18 C-6 8 8 16 10 30 M-10 -30 C-18 -6 -10 18 2 32', shade(v.color, -0.18), 2.4)}
+        ${L('M28 18 C38 24 36 34 30 36', v.color, 3)}
+        ${C(0, 0, 32, GLOSS)}`,
+    },
+    // --- mutfak dolabı (önden)
+    spice: {
+      w: 42, h: 82,
+      draw: v => `
+        ${R(-17, -40, 34, 14, 4, v.lid, EDGE)}
+        ${R(-18, -28, 36, 68, 8, '#eef8fb', EDGE + ' fill-opacity=".9"')}
+        ${R(-18, -2, 36, 42, 8, v.color)}
+        ${R(-12, -18, 24, 14, 2, '#fffaf5')}
+        ${R(-18, -28, 36, 68, 8, CYL)}`,
+    },
+    plates: {
+      w: 122, h: 42,
+      draw: v => [12, 2, -8].map(y => `${E(0, y, 58, 9, '#fffaf5', EDGE)}${E(0, y - 1, 44, 5, v.color, 'fill-opacity=".45"')}`).join('') + E(0, -9, 58, 9, 'none', `stroke="${v.color}" stroke-width="2.5"`),
+    },
+    teapot: {
+      w: 112, h: 86,
+      draw: v => `
+        ${P('M30 6 C42 -2 48 -14 54 -18 L52 -10 C46 0 42 14 30 20 Z', v.color, EDGE)}
+        ${RING(-38, 4, 16, 18, 8, 10, v.color, EDGE)}
+        ${P('M-32 34 C-40 20 -38 -10 -20 -20 H20 C38 -10 40 20 32 34 Z', v.color, EDGE)}
+        ${R(-20, -28, 40, 10, 5, shade(v.color, -0.12), EDGE)}${C(0, -34, 6, shade(v.color, -0.12), EDGE)}
+        ${C(-8, 6, 8, '#fff', 'fill-opacity=".8"')}${C(10, 12, 6, '#fff', 'fill-opacity=".6"')}
+        ${P('M-32 34 C-40 20 -38 -10 -20 -20 H20 C38 -10 40 20 32 34 Z', CYL)}`,
+    },
+    cereal: {
+      w: 72, h: 112,
+      draw: v => `
+        ${R(-34, -54, 68, 108, 4, v.color, EDGE)}
+        ${R(-34, -54, 68, 18, 4, shade(v.color, -0.15))}
+        ${E(0, 14, 24, 18, '#fffaf5')}${[[-8, 10], [6, 8], [0, 18], [-12, 20], [12, 18]].map(([x, y]) => C(x, y, 5, '#f2b93a')).join('')}
+        ${R(-24, -28, 48, 10, 5, '#fff', 'fill-opacity=".85"')}
+        ${R(-34, -54, 12, 108, 3, '#000', 'fill-opacity=".08"')}`,
+    },
+    pasta: {
+      w: 66, h: 112,
+      draw: v => `
+        ${R(-27, -55, 54, 16, 5, v.lid, EDGE)}
+        ${R(-30, -40, 60, 94, 12, '#eef8fb', EDGE + ' fill-opacity=".9"')}
+        ${Array.from({ length: 14 }, (_, i) => `<rect x="${-22 + (i % 4) * 12}" y="${-6 + Math.floor(i / 4) * 14}" width="9" height="5" rx="2" fill="#f2c66a" transform="rotate(${(i * 37) % 60 - 30} ${-18 + (i % 4) * 12} ${-4 + Math.floor(i / 4) * 14})"/>`).join('')}
+        ${R(-30, -40, 60, 94, 12, CYL)}`,
+    },
+  });
+
   // ---------------------------------------------------------------- kaplar (çekmece, dolap, oda...)
   function drawer(W, H, c) {
     // üstten görünen çekmece: dış çerçeve, iç duvar, köpük taban, ön panel ve kulp
@@ -979,6 +1164,81 @@
       ${[200, 380].map(y => `${R(26, y, W - 52, 11, 5, '#cfeeee', EDGE + ' fill-opacity=".92"')}${R(26, y, W - 52, 4, 2, '#fff', 'fill-opacity=".85"')}${R(32, y + 11, W - 64, 8, 4, '#000', 'fill-opacity=".05"')}`).join('')}
       ${R(22, 560, W - 44, 58, 0, '#f6ece2')}${R(22, 560, W - 44, 5, 0, '#000', 'fill-opacity=".06"')}
       ${R(0, H - 22, W, 22, 11, '#fffaf5', EDGE)}`;
+  }
+
+  function bedroom(W, H) {
+    const fy = 440;
+    return `
+      <defs>
+        <pattern id="dz-wp-yatak" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" fill="#ece4fb"/><path d="M15 10 q4 6 0 12 q-4 -6 0 -12z M45 40 q4 6 0 12 q-4 -6 0 -12z" fill="#d9ccf5"/></pattern>
+        <clipPath id="dz-clip-yatak"><rect width="${W}" height="${H}" rx="30"/></clipPath>
+      </defs>
+      ${R(14, 22, W - 28, H - 24, 30, '#3b2340', 'fill-opacity=".22" filter="url(#dz-cont)"')}
+      <g clip-path="url(#dz-clip-yatak)">
+        ${R(0, 0, W, fy, 0, 'url(#dz-wp-yatak)')}
+        ${R(0, fy, W, H - fy, 0, '#e9cfb4')}
+        ${Array.from({ length: 4 }, (_, i) => R(0, fy + 6 + i * 36, W, 2, 0, '#dbb994')).join('')}
+        ${R(0, fy - 10, W, 14, 0, '#fffaf5')}
+        <!-- duvar rafı ve şifonyer -->
+        ${R(30, 150, 250, 12, 5, '#f6dcc0', EDGE)}${R(30, 160, 250, 4, 0, '#000', 'fill-opacity=".07"')}
+        ${R(30, 300, 250, 142, 12, '#fbe6d2', EDGE)}${R(24, 294, 262, 14, 7, '#f3d2b4', EDGE)}
+        ${[322, 362, 402].map(y => `${R(44, y, 222, 32, 6, '#f8dcc4', EDGE)}${R(140, y + 13, 30, 6, 3, GOLD)}`).join('')}
+        <!-- komodin -->
+        ${R(312, 360, 104, 82, 10, '#fbe6d2', EDGE)}${R(306, 354, 116, 12, 6, '#f3d2b4', EDGE)}${R(326, 384, 76, 26, 5, '#f8dcc4', EDGE)}${C(364, 397, 4, GOLD)}
+        <!-- yatak -->
+        ${R(832, 220, 54, 224, 20, '#f6b8c8', EDGE)}${R(832, 220, 54, 30, 15, TOP)}
+        ${R(440, 340, 430, 60, 16, '#fffaf5', EDGE)}
+        ${P('M440 368 H690 C700 368 708 378 708 390 V428 C708 436 700 440 692 440 H454 C446 440 440 434 440 426 Z', '#c9b3ec', EDGE)}
+        ${[470, 520, 570, 620, 670].map(x => P(`M${x} 384 l6 10 l-6 10 l-6 -10z`, '#fff', 'fill-opacity=".5"')).join('')}
+        ${R(450, 430, 12, 16, 4, '#f6b8c8')}${R(846, 430, 12, 16, 4, '#f6b8c8')}
+        <!-- askı -->
+        ${C(480, 120, 5, GOLD, EDGE)}
+        <!-- halı -->
+        ${E(560, 515, 190, 38, '#cfeee4')}${E(560, 515, 160, 28, 'none', 'stroke="#fff" stroke-opacity=".6" stroke-width="4" stroke-dasharray="10 8"')}
+      </g>
+      ${R(0, 0, W, H, 30, 'none', 'stroke="#fff" stroke-width="10"')}${R(0, 0, W, H, 30, 'none', EDGE)}`;
+  }
+  function deskMat(W, H) {
+    return `
+      ${R(18, 26, W - 36, H - 30, 30, '#3b2340', 'fill-opacity=".25" filter="url(#dz-cont)"')}
+      ${R(0, 0, W, H, 30, '#c7a4e6', EDGE)}${R(0, 0, W, 60, 30, TOP)}
+      ${R(14, 14, W - 28, H - 28, 22, '#ede4fa')}
+      ${R(14, 14, W - 28, H - 28, 22, 'url(#dz-dots)')}
+      ${R(26, 26, W - 52, H - 52, 16, 'none', 'stroke="#c7a4e6" stroke-width="2" stroke-dasharray="8 6"')}
+      ${R(26, 250, W - 52, 2, 1, '#c7a4e6', 'fill-opacity=".5"')}`;
+  }
+  function picnicBasket(W, H) {
+    return `
+      <defs><pattern id="dz-gingham" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#fff4f6"/><rect width="20" height="40" fill="#f9c6d3" fill-opacity=".55"/><rect width="40" height="20" fill="#f9c6d3" fill-opacity=".55"/></pattern>
+        <pattern id="dz-wicker" width="24" height="16" patternUnits="userSpaceOnUse"><rect width="24" height="16" fill="#e2b77c"/><path d="M0 4 Q6 0 12 4 T24 4 M0 12 Q6 8 12 12 T24 12" stroke="#c99a5c" stroke-width="2.5" fill="none"/></pattern></defs>
+      ${R(18, 26, W - 36, H - 30, 40, '#3b2340', 'fill-opacity=".25" filter="url(#dz-cont)"')}
+      ${R(-16, H / 2 - 50, 40, 100, 18, 'none', 'stroke="#c99a5c" stroke-width="10"')}${R(W - 24, H / 2 - 50, 40, 100, 18, 'none', 'stroke="#c99a5c" stroke-width="10"')}
+      ${R(0, 0, W, H, 40, 'url(#dz-wicker)', EDGE)}${R(0, 0, W, 60, 40, TOP)}
+      ${R(20, 20, W - 40, H - 40, 30, '#c99a5c')}
+      ${R(28, 30, W - 56, H - 58, 24, 'url(#dz-gingham)')}
+      ${R(28, 30, W - 56, 14, 7, '#000', 'fill-opacity=".06"')}`;
+  }
+  function sewingBox(W, H, fabric) {
+    return `
+      ${R(18, 24, W - 36, H - 30, 30, '#3b2340', 'fill-opacity=".25" filter="url(#dz-cont)"')}
+      ${R(0, 0, W, H, 30, '#f0d2b0', EDGE)}${R(0, 0, W, 60, 30, TOP)}
+      ${L(`M20 ${H * 0.3} H${W - 20} M20 ${H * 0.7} H${W - 20}`, '#d9b48a', 2, 'stroke-opacity=".5"')}
+      ${R(24, 24, W - 48, H - 48, 20, '#d9b48a')}
+      ${R(32, 32, W - 64, H - 64, 16, fabric)}
+      ${R(32, 32, W - 64, H - 64, 16, 'url(#dz-dots)')}
+      ${R(32, 32, W - 64, 14, 7, '#000', 'fill-opacity=".07"')}
+      ${R(40, 258, W - 80, 6, 3, '#d9b48a')}`;
+  }
+  function kitchenCabinet(W, H) {
+    return `
+      <defs><pattern id="dz-plank-dolap" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" fill="#eaf6ef"/><rect x="58" width="2" height="60" fill="#d4ebdd"/></pattern></defs>
+      ${R(14, 22, W - 28, H - 24, 30, '#3b2340', 'fill-opacity=".22" filter="url(#dz-cont)"')}
+      ${R(0, 0, W, H, 30, '#fff3e3', EDGE)}${R(0, 0, W, 60, 30, TOP)}
+      ${R(22, 22, W - 44, H - 44, 18, 'url(#dz-plank-dolap)')}
+      ${R(22, 22, W - 44, 16, 8, '#000', 'fill-opacity=".05"')}
+      ${[210, 400].map(y => `${R(22, y, W - 44, 14, 4, '#f6dcc0', EDGE)}${R(22, y, W - 44, 4, 2, '#fff', 'fill-opacity=".6"')}${R(28, y + 14, W - 56, 8, 4, '#000', 'fill-opacity=".05"')}`).join('')}
+      ${R(22, 600, W - 44, 38, 0, '#f6dcc0')}${R(22, 600, W - 44, 5, 0, '#000', 'fill-opacity=".06"')}
+      ${R(0, H - 22, W, 22, 11, '#fff3e3', EDGE)}`;
   }
 
   // ---------------------------------------------------------------- bölümler
@@ -1251,6 +1511,148 @@
             { k: 'rollingPin', v: { handle: '#9fdcc8' }, x: 470, y: 394 },
           ],
         },
+      ],
+    },
+    {
+      id: 'yatak-odasi', name: 'Yatak Odası', short: 'Yastıklar, kitaplar, çerçeveler',
+      W: 900, H: 580, target: 110,
+      table: { a: '#efe7f7', b: '#e7ddf2', line: '#d9cbe8', grain: '#d4c4e4' },
+      slotColor: '#d6c6ee',
+      container: () => bedroom(900, 580),
+      slots: [
+        { k: 'book', v: { color: '#f7a77a' }, x: 62, y: 94 },
+        { k: 'bookTall', v: { color: '#9ec9f5' }, x: 94, y: 90 },
+        { k: 'book', v: { color: '#f58aa6' }, x: 126, y: 94 },
+        { k: 'frame', v: { color: '#f6c453' }, x: 210, y: 106 },
+        { k: 'perfume', v: { cap: '#c7b3ef', glass: '#e6dcfb', liquid: '#cbb3f2' }, x: 84, y: 236 },
+        { k: 'cream', v: { color: '#f7a1b4' }, x: 160, y: 271 },
+        { k: 'plant', v: { pot: '#f7a77a' }, x: 236, y: 241 },
+        { k: 'lamp', v: { shade: '#cfeee4', base: '#f6b8c8' }, x: 352, y: 297 },
+        { k: 'clock', v: { color: '#c9b3ec' }, x: 364, y: 180 },
+        { k: 'cap', v: { color: '#9fdcc8' }, x: 486, y: 150 },
+        { k: 'frame', v: { color: '#f7a1b4' }, x: 640, y: 170 },
+        { k: 'frame', v: { color: '#9fdcc8' }, x: 740, y: 170 },
+        { k: 'teddy', v: { color: '#f3c9a6', bow: '#9ec9f5' }, x: 600, y: 287 },
+        { k: 'pillow', v: { color: '#fde2ea' }, x: 700, y: 306 },
+        { k: 'pillow', v: { color: '#e6dcfb' }, x: 790, y: 306 },
+        { k: 'slippers', v: { color: '#f7a1b4', pom: '#fff' }, x: 560, y: 512 },
+      ],
+    },
+    {
+      id: 'calisma-masasi', name: 'Çalışma Masası', short: 'Kulaklık, telefon, kalemler',
+      W: 780, H: 520, target: 110,
+      table: { a: '#f3eadf', b: '#ece0d2', line: '#e0cfbc', grain: '#dbc7b1' },
+      slotColor: '#d6c6ee',
+      container: () => deskMat(780, 520),
+      slots: [
+        { k: 'novel', v: { color: '#9ec9f5', ribbon: '#f27a9b' }, x: 102, y: 112 },
+        { k: 'notes', v: { color: '#ffe48f' }, x: 222, y: 90 },
+        { k: 'notes', v: { color: '#ffc2d4' }, x: 222, y: 182 },
+        { k: 'phone', v: { color: '#f7a1b4' }, x: 322, y: 112 },
+        { k: 'headphones', v: { color: '#9fdcc8', pad: '#fffaf5' }, x: 452, y: 112 },
+        { k: 'mugTop', v: { color: '#f7a77a' }, x: 592, y: 100 },
+        { k: 'sunglasses', v: { frame: '#c3a6ee', lens: '#e3f2fa' }, x: 680, y: 202 },
+        { k: 'pencil', v: { color: '#ffcf5c' }, x: 80, y: 362 },
+        { k: 'pencil', v: { color: '#9fd8f5' }, x: 112, y: 362 },
+        { k: 'pencil', v: { color: '#f7a1b4' }, x: 144, y: 362 },
+        { k: 'pen', v: { color: '#6f9fe8' }, x: 186, y: 362 },
+        { k: 'pen', v: { color: '#e86f8f' }, x: 218, y: 362 },
+        { k: 'ruler', v: { color: '#fbd3df' }, x: 420, y: 300 },
+        { k: 'eraser', v: { sleeve: '#c3a6ee' }, x: 330, y: 404 },
+        { k: 'sharpener', v: { color: '#9fdcc8' }, x: 430, y: 404 },
+        { k: 'clip', v: { color: '#f7a1b4' }, x: 500, y: 402 },
+        { k: 'clip', v: { color: '#7fc8ee' }, x: 540, y: 402 },
+        { k: 'marker', v: { color: '#c3a6ee' }, x: 620, y: 372 },
+        { k: 'marker', v: { color: '#ffb36b' }, x: 662, y: 372 },
+      ],
+    },
+    {
+      id: 'piknik', name: 'Piknik Sepeti', short: 'Sandviç, meyve, kek',
+      W: 760, H: 500, target: 100,
+      table: { a: '#e4f3dc', b: '#d9edcf', line: '#c8e2bb', grain: '#c2ddb3' },
+      slotColor: '#f3c2cf',
+      container: () => picnicBasket(760, 500),
+      slots: [
+        { k: 'sandwich', v: {}, x: 112, y: 120 },
+        { k: 'sandwich', v: {}, x: 222, y: 120 },
+        { k: 'grapes', v: {}, x: 330, y: 122 },
+        { k: 'thermos', v: { color: '#9ec9f5' }, x: 410, y: 150 },
+        { k: 'juice', v: { color: '#ffb54d', cap: '#7cc46a', fruit: '#ff9a3c' }, x: 472, y: 150 },
+        { k: 'cheese', v: {}, x: 590, y: 102 },
+        { k: 'lemon', v: {}, x: 568, y: 172 },
+        { k: 'lemon', v: {}, x: 630, y: 172 },
+        { k: 'cupcake', v: { cup: '#9fdcc8', frost: '#ffd9e3' }, x: 100, y: 362 },
+        { k: 'cupcake', v: { cup: '#c3a6ee', frost: '#fff3d6' }, x: 172, y: 362 },
+        { k: 'strawberry', v: {}, x: 244, y: 340 },
+        { k: 'strawberry', v: {}, x: 294, y: 340 },
+        { k: 'strawberry', v: {}, x: 244, y: 396 },
+        { k: 'strawberry', v: {}, x: 294, y: 396 },
+        { k: 'apple', v: { color: '#f2606e' }, x: 374, y: 362 },
+        { k: 'apple', v: { color: '#9bd36a' }, x: 444, y: 362 },
+        { k: 'towel', v: { color: '#fffaf5', stripe: '#f58aa6' }, x: 580, y: 360 },
+      ],
+    },
+    {
+      id: 'dikis-kutusu', name: 'Dikiş Kutusu', short: 'Makaralar, düğmeler, yün',
+      W: 700, H: 480, target: 140,
+      table: { a: '#fdf0e6', b: '#f8e6d8', line: '#eed3c0', grain: '#eacdb6' },
+      slotColor: '#e9a9bd',
+      drawers: [
+        {
+          name: 'Üst kat',
+          container: () => sewingBox(700, 480, '#f9c6d3'),
+          slots: [
+            ...['#f27a9b', '#7fc8ee', '#ffd36b', '#8fd6a6', '#c3a6ee', '#ffb36b'].map((c, i) => ({ k: 'spool', v: { color: c }, x: 80 + i * 52, y: 122 })),
+            { k: 'thimble', v: {}, x: 432, y: 112 },
+            { k: 'thimble', v: {}, x: 482, y: 112 },
+            { k: 'pincushion', v: {}, x: 590, y: 122 },
+            { k: 'tape', v: {}, x: 108, y: 356 },
+            { k: 'scissors', v: { color: '#7fc8ee' }, x: 232, y: 352 },
+            { k: 'spool', v: { color: '#f7a1b4' }, x: 332, y: 360 },
+            { k: 'spool', v: { color: '#9fdcc8' }, x: 384, y: 360 },
+            { k: 'yarn', v: { color: '#c3a6ee' }, x: 484, y: 358 },
+            { k: 'yarn', v: { color: '#ffb36b' }, x: 580, y: 358 },
+          ],
+        },
+        {
+          name: 'Alt kat', slotColor: '#a6d6c6',
+          container: () => sewingBox(700, 480, '#cfeee4'),
+          slots: [
+            ...['#f27a9b', '#7fc8ee', '#ffd36b', '#8fd6a6', '#c3a6ee', '#ffb36b', '#f7a1b4', '#9fdcc8'].map((c, i) => ({ k: 'button', v: { color: c }, x: 92 + (i % 4) * 58, y: i < 4 ? 108 : 168 })),
+            { k: 'yarn', v: { color: '#f27a9b' }, x: 410, y: 138 },
+            { k: 'yarn', v: { color: '#7fc8ee' }, x: 500, y: 138 },
+            { k: 'scissors', v: { color: '#f58aa6' }, x: 604, y: 160 },
+            ...['#ffd36b', '#c3a6ee', '#f27a9b', '#8fd6a6'].map((c, i) => ({ k: 'spool', v: { color: c }, x: 92 + i * 54, y: 362 })),
+            { k: 'pincushion', v: {}, x: 390, y: 362 },
+            { k: 'tape', v: {}, x: 500, y: 362 },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'mutfak-dolabi', name: 'Mutfak Dolabı', short: 'Baharatlar, kavanozlar, demlik',
+      W: 640, H: 660, target: 120,
+      table: { a: '#fdf3e4', b: '#f8ead4', line: '#efd9b8', grain: '#ebd2ac' },
+      slotColor: '#cfe6da',
+      container: () => kitchenCabinet(640, 660),
+      slots: [
+        ...['#e05a3c', '#f2b93a', '#7cc46a', '#b5703f', '#f27a9b'].map((c, i) => ({ k: 'spice', v: { color: c, lid: '#fffaf5' }, x: 70 + i * 48, y: 168 })),
+        { k: 'jam', v: { color: '#f2a93a', lid: '#ffd36b' }, x: 336, y: 175 },
+        { k: 'jam', v: { color: '#e0567c', lid: '#f58aa6' }, x: 402, y: 175 },
+        { k: 'mug', v: { color: '#9ec9f5' }, x: 484, y: 177 },
+        { k: 'mug', v: { color: '#f7a1b4' }, x: 566, y: 177 },
+        { k: 'plates', v: { color: '#7fc8ee' }, x: 102, y: 378 },
+        { k: 'teapot', v: { color: '#f7a1b4' }, x: 248, y: 356 },
+        { k: 'pasta', v: { lid: '#f7a77a' }, x: 378, y: 343 },
+        { k: 'pasta', v: { lid: '#9fdcc8' }, x: 452, y: 343 },
+        { k: 'spice', v: { color: '#c3a6ee', lid: '#fffaf5' }, x: 530, y: 358 },
+        { k: 'spice', v: { color: '#ffd36b', lid: '#fffaf5' }, x: 580, y: 358 },
+        { k: 'cereal', v: { color: '#ffb36b' }, x: 80, y: 543 },
+        { k: 'cereal', v: { color: '#9fdcc8' }, x: 160, y: 543 },
+        { k: 'plates', v: { color: '#f58aa6' }, x: 290, y: 578 },
+        { k: 'jam', v: { color: '#c3a6ee', lid: '#e6dcfb' }, x: 410, y: 565 },
+        { k: 'thermos', v: { color: '#f7a77a' }, x: 500, y: 528 },
+        { k: 'mug', v: { color: '#ffd36b' }, x: 574, y: 567 },
       ],
     },
   ];
